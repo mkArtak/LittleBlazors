@@ -1,7 +1,7 @@
 ﻿using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace LittleBlazors.Components.Charts
+namespace LittleBlazors.Components.Charts.Interop
 {
     internal class GoogleChartsInterop
     {
@@ -13,13 +13,13 @@ namespace LittleBlazors.Components.Charts
             this.jsRuntime = jsRuntime;
         }
 
-        public async Task InitializeCharts(string container)
+        public Task InitializeCharts(string container)
         {
             if (chartsInitialized)
-                return;
+                return Task.CompletedTask;
 
-            await this.jsRuntime.InvokeAsync<int>("jsInterop.initGoogleCharts", container);
             chartsInitialized = true;
+            return this.jsRuntime.InvokeAsync<int>("littleBlazors.init", container);
         }
     }
 }

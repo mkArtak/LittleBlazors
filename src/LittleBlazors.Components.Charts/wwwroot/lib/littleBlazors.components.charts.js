@@ -1,17 +1,12 @@
 // This file is to show how a library package may provide JavaScript interop features
 // wrapped in a .NET API
 
-window.exampleJsFunctions = {
-    showPrompt: function (message) {
-        return prompt(message, 'Type anything here');
-    },
-
-    initGoogleCharts: function (container) {
+window.littleBlazors = {
+    init: function (container) {
         console.log('Initializing charts to be drown in container: ' + container);
         google.charts.load('current', { packages: ['corechart'] });
         google.charts.setOnLoadCallback(() => drawChart(container));
-        return 0;
-    },
+    }
 };
 
 function drawChart(containerName) {

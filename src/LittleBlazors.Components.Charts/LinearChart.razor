@@ -1,4 +1,6 @@
-﻿@inject GoogleChartsInterop interop;
+﻿@using LittleBlazors.Components.Charts.Interop;
+
+@inject GoogleChartsInterop interop;
 
 <div class="my-component">
     This Blazor component is defined in the <strong>LittleBlazors.Components.Charts</strong> package.
@@ -14,6 +16,6 @@
 
     protected override Task OnAfterRenderAsync()
     {
-        return this.interop.InitializeCharts();
+        return this.interop.InitializeCharts("myPieChart");
     }
 }

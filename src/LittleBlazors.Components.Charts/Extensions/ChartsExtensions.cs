@@ -1,4 +1,4 @@
-﻿using LittleBlazors.Components.Charts;
+﻿using LittleBlazors.Components.Charts.Interop;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
