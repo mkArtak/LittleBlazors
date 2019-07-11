@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/LittleBlazors.Components.Charts/bin
+/src/LittleBlazors.Components.Charts/obj
+/test/LittleBlazors.TestHost/.vs
+/test/LittleBlazors.TestHost/bin
+/test/LittleBlazors.TestHost/obj
