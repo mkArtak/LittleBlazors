@@ -4,11 +4,13 @@
 
 <div class="my-component">
     This Blazor component is defined in the <strong>LittleBlazors.Components.Charts</strong> package.
-
 </div>
-<div id="myPieChart" />
+
+<div @ref="chartContainer" />
 
 @code {
+    ElementRef chartContainer;
+
     protected override void OnInit()
     {
 
@@ -16,6 +18,6 @@
 
     protected override Task OnAfterRenderAsync()
     {
-        return this.interop.InitializeCharts("myPieChart");
+        return this.interop.InitializeCharts(chartContainer);
     }
 }

@@ -3,15 +3,12 @@
 
 window.littleBlazors = {
     init: function (container) {
-        console.log('Initializing charts to be drown in container: ' + container);
         google.charts.load('current', { packages: ['corechart'] });
         google.charts.setOnLoadCallback(() => drawChart(container));
     }
 };
 
-function drawChart(containerName) {
-    console.log('drawing charts in container: ' + containerName);
-
+function drawChart(container) {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Element');
@@ -23,6 +20,6 @@ function drawChart(containerName) {
     ]);
 
     // Instantiate and draw the chart.
-    var chart = new google.visualization.PieChart(document.getElementById(containerName));
+    var chart = new google.visualization.PieChart(container);
     chart.draw(data, null);
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
 namespace LittleBlazors.Components.Charts.Interop
@@ -13,7 +14,7 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task InitializeCharts(string container)
+        public Task InitializeCharts(ElementRef container)
         {
             if (chartsInitialized)
                 return Task.CompletedTask;
