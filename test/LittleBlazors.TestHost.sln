@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29111.66
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.TestHost", "LittleBlazors.TestHost\LittleBlazors.TestHost.csproj", "{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Charts", "..\src\LittleBlazors.Components.Charts\LittleBlazors.Components.Charts.csproj", "{2E8FAC65-715E-4161-86D8-9A284710FEC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEDACEAE-4202-4F78-A1BC-33E706218D20}
+	EndGlobalSection
+EndGlobal
