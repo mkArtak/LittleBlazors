@@ -7,17 +7,20 @@
 </div>
 
 <div @ref="chartContainer" />
+<div style="border: 1px solid red;" @ref="chartContainer2" />
 
 @code {
     ElementRef chartContainer;
+    ElementRef chartContainer2;
 
     protected override void OnInit()
     {
 
     }
 
-    protected override Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync()
     {
-        return this.interop.InitializeCharts(chartContainer);
+        await this.interop.InitializeCharts(chartContainer);
+        await this.interop.InitializeCharts(chartContainer2);
     }
 }
