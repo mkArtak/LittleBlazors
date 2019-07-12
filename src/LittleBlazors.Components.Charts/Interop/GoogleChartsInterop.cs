@@ -13,9 +13,9 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task InitializeCharts(ElementRef container)
+        public Task DrawAsync(ElementRef container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.init", container);
+            return this.jsRuntime.InvokeAsync<object>("littleBlazors.draw", container);
         }
     }
 }

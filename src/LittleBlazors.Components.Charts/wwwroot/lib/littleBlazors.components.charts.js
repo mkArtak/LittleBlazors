@@ -1,10 +1,18 @@
 // This file is to show how a library package may provide JavaScript interop features
 // wrapped in a .NET API
+var loaded = false;
 
 window.littleBlazors = {
-    init: function (container) {
-        google.charts.load('current', { packages: ['corechart'] });
-        google.charts.setOnLoadCallback(() => drawChart(container));
+    draw: function (container) {
+        if (loaded) {
+            drawChart(container);
+        } else {
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(() => {
+                loaded = true;
+                drawChart(container);
+            });
+        }
     }
 };
 

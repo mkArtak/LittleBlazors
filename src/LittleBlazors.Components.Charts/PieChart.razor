@@ -1,4 +1,5 @@
 ﻿@using LittleBlazors.Components.Charts.Interop;
+@using Microsoft.JSInterop;
 
 @inject GoogleChartsInterop interop;
 
@@ -6,7 +7,7 @@
     This Blazor component is defined in the <strong>LittleBlazors.Components.Charts</strong> package.
 </div>
 
-<div @ref="chartContainer" />
+<div @ref="chartContainer" style="border: 1px solid blue;" />
 <div style="border: 1px solid red;" @ref="chartContainer2" />
 
 @code {
@@ -20,7 +21,7 @@
 
     protected override async Task OnAfterRenderAsync()
     {
-        await this.interop.InitializeCharts(chartContainer);
-        await this.interop.InitializeCharts(chartContainer2);
+        await this.interop.DrawAsync(chartContainer);
+        await this.interop.DrawAsync(chartContainer2);
     }
 }
