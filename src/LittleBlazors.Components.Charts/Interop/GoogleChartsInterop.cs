@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LittleBlazors.Components.Charts.Interop
@@ -13,9 +14,9 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task DrawAsync(ElementRef container)
+        public Task DrawAsync(IDictionary<string, double> data, ElementRef container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.draw", container);
+            return this.jsRuntime.InvokeAsync<object>("littleBlazors.draw", data, container);
         }
     }
 }

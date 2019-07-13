@@ -3,29 +3,28 @@
 var loaded = false;
 
 window.littleBlazors = {
-    draw: function (container) {
+    draw: function (chartData, container) {
         if (loaded) {
             drawChart(container);
         } else {
             google.charts.load('current', { packages: ['corechart'] });
             google.charts.setOnLoadCallback(() => {
                 loaded = true;
-                drawChart(container);
+                drawChart(chartData, container);
             });
         }
     }
 };
 
-function drawChart(container) {
+function drawChart(chartData, container) {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Element');
     data.addColumn('number', 'Percentage');
-    data.addRows([
-        ['Nitrogen', 0.78],
-        ['Oxygen', 0.21],
-        ['Other', 0.01]
-    ]);
+
+    for (var i in chartData) {
+        data.addRows([[i, chartData[i]]]);
+    }
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(container);

@@ -2,5 +2,16 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+@{
+    var data1 = new Dictionary<string, double>() { { "hi", 1.0 }, { "bye", 23 } };
 
-<LittleBlazors.Components.Charts.PieChart />
+    var data2 = new Dictionary<string, double>() { { "cows", 12 }, { "sheep", 3 }, { "deer", 7 } };
+}
+
+<div style="border: 1px solid blue">
+    <LittleBlazors.Components.Charts.PieChart Data="data1" />
+</div>
+
+<div style="border: 1px solid red">
+    <LittleBlazors.Components.Charts.PieChart Data="data2" />
+</div>
