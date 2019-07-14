@@ -3,8 +3,12 @@
 var loaded = false;
 
 window.littleBlazors = {
-    drawPie: function (chartData, container) {
+    drawPieChart: function (chartData, container) {
         initialize(() => _drawPieChart(chartData, container));
+    },
+
+    drawLineChart: function (chartData, container) {
+        initialize(() => _drawLineChart(chartData, container));
     }
 };
 
@@ -33,4 +37,23 @@ function _drawPieChart(chartData, container) {
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(container);
     chart.draw(data, null);
+}
+
+function _drawLineChart(chartData, container) {
+    var data = google.visualization.arrayToDataTable([
+        ['Year', 'Sales', 'Expenses'],
+        ['2004', 1000, 400],
+        ['2005', 1170, 460],
+        ['2006', 660, 1120],
+        ['2007', 1030, 540]
+    ]);
+
+    var options = {
+        title: 'Company Performance',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(container);
+    chart.draw(data, options);
 }

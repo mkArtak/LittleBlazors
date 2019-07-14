@@ -1,0 +1,23 @@
+﻿@using LittleBlazors.Components.Charts.Interop;
+
+@inject GoogleChartsInterop interop;
+
+<div class="my-component">
+</div>
+
+<div @ref="chartContainer" />
+
+@code{
+    [Parameter] IDictionary<string, double> Data { get; set; }
+    ElementRef chartContainer;
+
+    protected override void OnInit()
+    {
+
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        await this.interop.DrawLineAsync(this.Data, chartContainer);
+    }
+}
