@@ -1,4 +1,4 @@
-﻿namespace LittleBlazors.Components.Charts.UI
+﻿namespace LittleBlazors.Components.Charts.Model
 {
     public enum ChartDataType
     {

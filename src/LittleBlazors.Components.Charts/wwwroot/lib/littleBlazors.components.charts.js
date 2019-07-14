@@ -40,13 +40,30 @@ function _drawPieChart(chartData, container) {
 }
 
 function _drawLineChart(chartData, container) {
-    var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses'],
-        ['2004', 1000, 400],
-        ['2005', 1170, 460],
-        ['2006', 660, 1120],
-        ['2007', 1030, 540]
-    ]);
+    var realData = new google.visualization.DataTable();
+
+    console.log(JSON.stringify(chartData));
+
+    // Add columns
+    realData.addColumn('number', chartData.baseLineName);
+    for (var i in chartData.lines) {
+        realData.addColumn('number', i);
+    }
+
+    var allRows = new Array();
+    var rowIndex = 0;
+    for (var r in chartData.baseLineData.data) {
+        var rowData = new Array();
+        rowData.push(chartData.baseLineData.data[r]);
+
+        for (var i in chartData.lines) {
+            rowData.push(chartData.lines[i].data[rowIndex]);
+        }
+        allRows.push(rowData);
+        rowIndex++;
+    }
+
+    realData.addRows(allRows);
 
     var options = {
         title: 'Company Performance',
@@ -55,5 +72,5 @@ function _drawLineChart(chartData, container) {
     };
 
     var chart = new google.visualization.LineChart(container);
-    chart.draw(data, options);
+    chart.draw(realData, options);
 }

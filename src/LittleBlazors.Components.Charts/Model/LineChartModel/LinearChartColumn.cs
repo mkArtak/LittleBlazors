@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LittleBlazors.Components.Charts.UI
+namespace LittleBlazors.Components.Charts.Model.LineChartModel
 {
     public class LinearChartColumn
     {
