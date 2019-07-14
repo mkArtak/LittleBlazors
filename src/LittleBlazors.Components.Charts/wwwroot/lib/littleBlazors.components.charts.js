@@ -3,20 +3,24 @@
 var loaded = false;
 
 window.littleBlazors = {
-    draw: function (chartData, container) {
-        if (loaded) {
-            drawChart(container);
-        } else {
-            google.charts.load('current', { packages: ['corechart'] });
-            google.charts.setOnLoadCallback(() => {
-                loaded = true;
-                drawChart(chartData, container);
-            });
-        }
+    drawPie: function (chartData, container) {
+        initialize(() => _drawPieChart(chartData, container));
     }
 };
 
-function drawChart(chartData, container) {
+function initialize(call) {
+    if (loaded) {
+        call();
+    } else {
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(() => {
+            loaded = true;
+            call();
+        });
+    }
+}
+
+function _drawPieChart(chartData, container) {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Element');

@@ -14,9 +14,9 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task DrawAsync(IDictionary<string, double> data, ElementRef container)
+        public Task DrawPieAsync(IDictionary<string, double> data, ElementRef container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.draw", data, container);
+            return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPie", data, container);
         }
     }
 }
