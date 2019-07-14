@@ -9,6 +9,11 @@ namespace LittleBlazors.Components.Charts.Model.LineChartModel
 
         }
 
+        /// <summary>
+        /// Gets or sets the chart title
+        /// </summary>
+        public string Title { get; set; }
+
         public string BaseLineName { get; set; }
 
         public LineData BaseLineData { get; set; }

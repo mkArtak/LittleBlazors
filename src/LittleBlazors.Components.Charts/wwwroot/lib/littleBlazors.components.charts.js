@@ -66,7 +66,7 @@ function _drawLineChart(chartData, container) {
     realData.addRows(allRows);
 
     var options = {
-        title: 'Company Performance',
+        title: chartData.title,
         curveType: 'function',
         legend: { position: 'bottom' }
     };
