@@ -3,6 +3,10 @@
     public enum ChartDataType
     {
         String,
-        Number
+        Number,
+        Boolean,
+        Date,
+        DateTime,
+        Time
     }
 }

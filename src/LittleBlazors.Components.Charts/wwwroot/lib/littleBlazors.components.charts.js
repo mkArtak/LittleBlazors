@@ -42,12 +42,13 @@ function _drawPieChart(chartData, container) {
 function _drawLineChart(chartData, container) {
     var realData = new google.visualization.DataTable();
 
-    console.log(JSON.stringify(chartData));
+    debugLog(chartData);
 
     // Add columns
-    realData.addColumn('number', chartData.baseLineName);
+    realData.addColumn(toLineType(chartData.baseLineData.type), chartData.baseLineData.LineName);
     for (var i in chartData.lines) {
-        realData.addColumn('number', i);
+        var lineType = toLineType(chartData.lines[i].type);
+        realData.addColumn(lineType, i);
     }
 
     var allRows = new Array();
@@ -73,4 +74,42 @@ function _drawLineChart(chartData, container) {
 
     var chart = new google.visualization.LineChart(container);
     chart.draw(realData, options);
+}
+
+function toLineType(chartDataType) {
+    var result;
+    switch (chartDataType) {
+        case 0: // string
+            result = "string";
+            break;
+
+        case 1: // number
+            result = "number";
+            break;
+
+        case 2:
+            result = "boolean";
+            break;
+
+        case 3:
+            result = "date";
+            break;
+
+        case 4:
+            result = "datetime";
+            break;
+
+        case 5:
+            result = "timeofday";
+            break;
+
+        default:
+            throw "Unkonwn type";
+    }
+
+    return result;
+}
+
+function debugLog(obj) {
+    console.log(JSON.stringify(obj));
 }
