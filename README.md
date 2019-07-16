@@ -21,6 +21,7 @@ So far I have a very light support of `Pie Chart` and `Line Chart`, which you ca
 ```
 
 This will result in the following chart:
+![Line chart sample](https://user-images.githubusercontent.com/7347708/61272148-46036180-a75b-11e9-9510-bb78cd9eeb85.png)
 
 
 **Pie Chart usage sample**
@@ -33,3 +34,4 @@ This will result in the following chart:
 ```
 
 And you'll get the following chart for this one:
+![Pie Chart](https://user-images.githubusercontent.com/7347708/61272104-2ec47400-a75b-11e9-9b18-c7d5680ba218.png)
