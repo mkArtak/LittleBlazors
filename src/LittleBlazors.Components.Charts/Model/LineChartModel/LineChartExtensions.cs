@@ -5,7 +5,7 @@ namespace LittleBlazors.Components.Charts.Model.LineChartModel
 {
     public static class LineChartExtensions
     {
-        public static LinearChartData AddLine(this LinearChartData chartData, LineData lineData)
+        public static LinearChartData AddLine(this LinearChartData chartData, DataLine lineData)
         {
             chartData.Lines.Add(lineData.LineName, lineData);
 
@@ -14,14 +14,7 @@ namespace LittleBlazors.Components.Charts.Model.LineChartModel
 
         public static LinearChartData AddLine<T>(this LinearChartData chartData, string lineName, System.Collections.Generic.IEnumerable<T> lineData) where T : struct
         {
-            return AddLine(chartData, new LineData { Data = lineData, LineName = lineName, Type = ToLineChartType<T>() });
-        }
-
-        public static LinearChartData SetBaseLine<T>(this LinearChartData chartData, string xAxisName, IEnumerable<T> xAxisMmarkers)
-        {
-            chartData.BaseLineData = new LineData { Data = xAxisMmarkers, LineName = xAxisName, Type = ToLineChartType<T>() };
-
-            return chartData;
+            return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<T>() });
         }
 
         private static readonly IDictionary<Type, ChartDataType> typeMappings = new Dictionary<Type, ChartDataType>() {

@@ -45,7 +45,6 @@ function _drawLineChart(chartData, container) {
     debugLog(chartData);
 
     // Add columns
-    realData.addColumn(toLineType(chartData.baseLineData.type), chartData.baseLineData.LineName);
     for (var i in chartData.lines) {
         var lineType = toLineType(chartData.lines[i].type);
         realData.addColumn(lineType, i);
@@ -53,15 +52,19 @@ function _drawLineChart(chartData, container) {
 
     var allRows = new Array();
     var rowIndex = 0;
-    for (var r in chartData.baseLineData.data) {
-        var rowData = new Array();
-        rowData.push(chartData.baseLineData.data[r]);
+    for (var r in chartData.lines) {
+        for (var rowIndex in chartData.lines[r].data) {
+            var rowData = new Array();
 
-        for (var i in chartData.lines) {
-            rowData.push(chartData.lines[i].data[rowIndex]);
+            for (var i in chartData.lines) {
+                rowData.push(chartData.lines[i].data[rowIndex]);
+            }
+
+            allRows.push(rowData);
+            rowIndex++;
         }
-        allRows.push(rowData);
-        rowIndex++;
+
+        break;
     }
 
     realData.addRows(allRows);

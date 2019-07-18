@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-namespace LittleBlazors.Components.Charts.Model.LineChartModel
+namespace LittleBlazors.Components.Charts.Model
 {
-    public class LineData
+    public class DataLine
     {
         public string LineName { get; set; }
 
