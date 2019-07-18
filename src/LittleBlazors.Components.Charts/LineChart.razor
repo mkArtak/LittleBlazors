@@ -1,5 +1,5 @@
 ﻿@using LittleBlazors.Components.Charts.Interop;
-@using LittleBlazors.Components.Charts.Model.LineChartModel;
+@using LittleBlazors.Components.Charts.Model;
 
 @inject GoogleChartsInterop interop;
 
@@ -9,7 +9,7 @@
 <div @ref="chartContainer" />
 
 @code{
-    [Parameter] LinearChartData Data { get; set; }
+    [Parameter] ChartData Data { get; set; }
     ElementRef chartContainer;
 
     protected override void OnInit()

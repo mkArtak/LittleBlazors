@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LittleBlazors.Components.Charts.Model.LineChartModel
+namespace LittleBlazors.Components.Charts.Model
 {
-    public static class LineChartExtensions
+    public static class ChartDataExtensions
     {
-        public static LinearChartData AddLine(this LinearChartData chartData, DataLine lineData)
+        public static ChartData AddLine(this ChartData chartData, DataLine lineData)
         {
             chartData.Lines.Add(lineData.LineName, lineData);
 
             return chartData;
         }
 
-        public static LinearChartData AddLine<T>(this LinearChartData chartData, string lineName, System.Collections.Generic.IEnumerable<T> lineData) where T : struct
+        public static ChartData AddLine<T>(this ChartData chartData, string lineName, System.Collections.Generic.IEnumerable<T> lineData) where T : struct
         {
             return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<T>() });
         }

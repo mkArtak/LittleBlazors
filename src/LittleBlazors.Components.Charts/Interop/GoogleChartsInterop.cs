@@ -1,4 +1,4 @@
-﻿using LittleBlazors.Components.Charts.Model.LineChartModel;
+﻿using LittleBlazors.Components.Charts.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace LittleBlazors.Components.Charts.Interop
             return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPieChart", data, container);
         }
 
-        public Task DrawLineAsync(LinearChartData data, ElementRef container)
+        public Task DrawLineAsync(ChartData data, ElementRef container)
         {
             return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawLineChart", data, container);
         }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace LittleBlazors.Components.Charts.Model.LineChartModel
+namespace LittleBlazors.Components.Charts.Model
 {
-    public class LinearChartData
+    public class ChartData
     {
-        public LinearChartData()
+        public ChartData()
         {
 
         }
