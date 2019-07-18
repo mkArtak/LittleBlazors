@@ -1,7 +1,6 @@
 ﻿using LittleBlazors.Components.Charts.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LittleBlazors.Components.Charts.Interop
@@ -15,9 +14,9 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task DrawPieAsync(IDictionary<string, double> data, ElementRef container)
+        public Task DrawPieAsync(PieChartData data, ElementRef container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPieChart", data, container);
+            return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPieChart", data.ToChartData(), container);
         }
 
         public Task DrawLineAsync(ChartData data, ElementRef container)

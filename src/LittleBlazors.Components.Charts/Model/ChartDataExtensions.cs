@@ -17,6 +17,11 @@ namespace LittleBlazors.Components.Charts.Model
             return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<T>() });
         }
 
+        public static ChartData AddLine(this ChartData chartData, string lineName, System.Collections.Generic.IEnumerable<string> lineData)
+        {
+            return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<string>() });
+        }
+
         private static readonly IDictionary<Type, ChartDataType> typeMappings = new Dictionary<Type, ChartDataType>() {
             { typeof(int), ChartDataType.Number },
             { typeof(double), ChartDataType.Number },

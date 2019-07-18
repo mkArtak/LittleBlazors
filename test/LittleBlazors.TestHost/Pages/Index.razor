@@ -1,8 +1,12 @@
 ﻿@page "/"
+@using LittleBlazors.Components.Charts.Model;
+
 <h1>Pie Chart Sample</h1>
 
 @{
-    var data1 = new Dictionary<string, double>() { { "hi", 1.0 }, { "bye", 23 } };
+    var data = new PieChartData { Title = "Distribution" }
+        .AddPieSection("hello", 34)
+        .AddPieSection("bye", 21);
 }
 
-<LittleBlazors.Components.Charts.PieChart Data="data1" />
+<LittleBlazors.Components.Charts.PieChart Data="data" />

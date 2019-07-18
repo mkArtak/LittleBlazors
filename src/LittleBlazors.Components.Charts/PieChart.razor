@@ -1,4 +1,5 @@
 ﻿@using LittleBlazors.Components.Charts.Interop;
+@using LittleBlazors.Components.Charts.Model;
 
 @inject GoogleChartsInterop interop;
 
@@ -8,8 +9,7 @@
 <div @ref="chartContainer" />
 
 @code {
-    [Parameter] IDictionary<string, double> Data { get; set; }
-
+    [Parameter] PieChartData Data { get; set; }
     ElementRef chartContainer;
 
     protected override void OnInit()

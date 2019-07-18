@@ -26,13 +26,7 @@ function initialize(call) {
 
 function _drawPieChart(chartData, container) {
     // Define the chart to be drawn.
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Element');
-    data.addColumn('number', 'Percentage');
-
-    for (var i in chartData) {
-        data.addRows([[i, chartData[i]]]);
-    }
+    var data = toDataTable(chartData);
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(container);
@@ -40,6 +34,19 @@ function _drawPieChart(chartData, container) {
 }
 
 function _drawLineChart(chartData, container) {
+    var realData = toDataTable(chartData);
+
+    var options = {
+        title: chartData.title,
+        curveType: 'function',
+        legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(container);
+    chart.draw(realData, options);
+}
+
+function toDataTable(chartData) {
     var realData = new google.visualization.DataTable();
 
     debugLog(chartData);
@@ -51,7 +58,6 @@ function _drawLineChart(chartData, container) {
     }
 
     var allRows = new Array();
-    var rowIndex = 0;
     for (var r in chartData.lines) {
         for (var rowIndex in chartData.lines[r].data) {
             var rowData = new Array();
@@ -61,7 +67,6 @@ function _drawLineChart(chartData, container) {
             }
 
             allRows.push(rowData);
-            rowIndex++;
         }
 
         break;
@@ -69,14 +74,7 @@ function _drawLineChart(chartData, container) {
 
     realData.addRows(allRows);
 
-    var options = {
-        title: chartData.title,
-        curveType: 'function',
-        legend: { position: 'bottom' }
-    };
-
-    var chart = new google.visualization.LineChart(container);
-    chart.draw(realData, options);
+    return realData;
 }
 
 function toLineType(chartDataType) {
