@@ -3,10 +3,7 @@
 
 @inject GoogleChartsInterop interop;
 
-<div class="my-component">
-</div>
-
-<div @ref="chartContainer" />
+<div @ref="chartContainer" style="height: 100%; width: 100%;" />
 
 @code{
     [Parameter] ChartData Data { get; set; }
