@@ -23,6 +23,8 @@ So far I have a very light support of `Pie Chart` and `Line Chart`, which you ca
 This will result in the following chart:
 ![Line chart sample](https://user-images.githubusercontent.com/7347708/61272148-46036180-a75b-11e9-9510-bb78cd9eeb85.png)
 
+You can experiment with the Line-Chart more using the `LittleBlazors.TestHost` project, which has a page which essentially simulates this:
+![](https://user-images.githubusercontent.com/7347708/61682492-b879c180-acc6-11e9-99f4-4dcd0dd05743.gif)
 
 **Pie Chart usage sample**
 ```razor
