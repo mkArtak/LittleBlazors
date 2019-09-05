@@ -8,3 +8,4 @@
 /test/LittleBlazors.TestHost/bin
 /test/LittleBlazors.TestHost/obj
 /test/.vs
+/src/LittleBlazors.Components.Charts/.vs

@@ -6,7 +6,7 @@ namespace LittleBlazors.Components.Charts.Model
 {
     public class PieChartData
     {
-        private IList<Tuple<string, double>> data = new List<Tuple<string, double>>();
+        private ICollection<Tuple<string, double>> data = new List<Tuple<string, double>>();
 
         public string Title { get; set; }
 

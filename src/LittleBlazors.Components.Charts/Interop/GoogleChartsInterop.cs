@@ -14,14 +14,14 @@ namespace LittleBlazors.Components.Charts.Interop
             this.jsRuntime = jsRuntime;
         }
 
-        public Task DrawPieAsync(PieChartData data, ElementRef container)
+        public async Task DrawPieAsync(PieChartData data, ElementReference container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPieChart", data.ToChartData(), container);
+            await this.jsRuntime.InvokeAsync<object>("littleBlazors.drawPieChart", data.ToChartData(), container);
         }
 
-        public Task DrawLineAsync(ChartData data, ElementRef container)
+        public async Task DrawLineAsync(ChartData data, ElementReference container)
         {
-            return this.jsRuntime.InvokeAsync<object>("littleBlazors.drawLineChart", data, container);
+            await this.jsRuntime.InvokeAsync<object>("littleBlazors.drawLineChart", data, container);
         }
     }
 }

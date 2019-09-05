@@ -9,15 +9,16 @@
 <div @ref="chartContainer" />
 
 @code {
-    [Parameter] PieChartData Data { get; set; }
-    ElementRef chartContainer;
+    [Parameter]
+    public PieChartData Data { get; set; }
+    private ElementReference chartContainer;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
 
     }
 
-    protected override async Task OnAfterRenderAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await this.interop.DrawPieAsync(this.Data, chartContainer);
     }

@@ -14,17 +14,17 @@
     ChartData data = new ChartData() { Title = "Sample chart" }
         .AddLine("x", Enumerable.Range(0, 10));
 
-    ElementRef lineChart;
+    ElementReference lineChart;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         AddRandomLine();
-        base.OnInit();
+        base.OnInitialized();
     }
 
-    protected override Task OnAfterRenderAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        return base.OnAfterRenderAsync();
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     public void AddRandomLine()
