@@ -58,12 +58,17 @@ function toDataTable(chartData) {
     }
 
     var allRows = new Array();
+    //TODO: The below loop-spaghetti is terribe. Need to be optimized
     for (var r in chartData.lines) {
         for (var rowIndex in chartData.lines[r].data) {
             var rowData = new Array();
 
             for (var i in chartData.lines) {
-                rowData.push(chartData.lines[i].data[rowIndex]);
+                lineType = toLineType(chartData.lines[i].type);
+                var converter = lineType == "datetime" ? (val) => new Date(val) : (val) => val;
+                var cellValue = chartData.lines[i].data[rowIndex];
+                cellValue = converter(cellValue);
+                rowData.push(cellValue);
             }
 
             allRows.push(rowData);
