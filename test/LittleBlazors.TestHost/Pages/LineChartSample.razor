@@ -12,7 +12,11 @@
 
 @code{
     ChartData data = new ChartData() { Title = "Sample chart" }
-        .AddLine("x", Enumerable.Range(0, 10));
+        .AddLine<DateTimeOffset>("x", Enumerable.Range(0, 10).Select(i =>
+        {
+            DateTimeOffset result = DateTimeOffset.UtcNow.AddDays(i);
+            return result.ToUniversalTime();
+        }));
 
     ElementReference lineChart;
 

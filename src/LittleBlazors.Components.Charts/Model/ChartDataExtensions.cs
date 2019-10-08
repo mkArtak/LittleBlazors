@@ -1,25 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LittleBlazors.Components.Charts.Model
 {
     public static class ChartDataExtensions
     {
-        public static ChartData AddLine(this ChartData chartData, DataLine lineData)
+        public static ChartData AddLine<T>(this ChartData chartData, string lineName, IEnumerable<T> lineData)
         {
-            chartData.Lines.Add(lineData.LineName, lineData);
+            System.Collections.IEnumerable data = lineData;
+            if (typeof(T) == typeof(DateTimeOffset))
+            {
+                data = lineData.OfType<DateTimeOffset>().Select(item => item.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            }
+            else if (typeof(T) == typeof(DateTime))
+            {
+                data = lineData.OfType<DateTime>().Select(item => item.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            }
+            else
+            {
+                data = lineData;
+            }
 
+            chartData.Lines.Add(lineName, new DataLine { Data = data, LineName = lineName, Type = ToLineChartType<T>() });
             return chartData;
-        }
-
-        public static ChartData AddLine<T>(this ChartData chartData, string lineName, System.Collections.Generic.IEnumerable<T> lineData) where T : struct
-        {
-            return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<T>() });
-        }
-
-        public static ChartData AddLine(this ChartData chartData, string lineName, System.Collections.Generic.IEnumerable<string> lineData)
-        {
-            return AddLine(chartData, new DataLine { Data = lineData, LineName = lineName, Type = ToLineChartType<string>() });
         }
 
         private static readonly IDictionary<Type, ChartDataType> typeMappings = new Dictionary<Type, ChartDataType>() {

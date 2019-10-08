@@ -19,9 +19,9 @@ namespace LittleBlazors.Components.Charts.Model
         public ChartData ToChartData()
         {
             ChartData result = new ChartData() { Title = this.Title }
-            .AddLine(new DataLine { LineName = Guid.NewGuid().ToString(), Data = this.data.Select(d => d.Item1) });
+            .AddLine<string>(Guid.NewGuid().ToString(), this.data.Select(d => d.Item1));
 
-            result.AddLine(new DataLine { LineName = Guid.NewGuid().ToString(), Type = ChartDataType.Number, Data = this.data.Select(d => d.Item2) });
+            result.AddLine<double>(Guid.NewGuid().ToString(), this.data.Select(d => d.Item2));
 
             return result;
         }
