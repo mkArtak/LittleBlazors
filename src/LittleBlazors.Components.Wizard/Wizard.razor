@@ -1,0 +1,49 @@
+﻿
+<div>
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@if (this.CanGoBack)
+{
+    <button id="btnNext" @onclick="OnBack">Back</button>
+}
+
+@if (this.CanGoNext)
+{
+    <button id="btnNext" @onclick="OnNext">Next</button>
+}
+
+@code{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private int currentPage = 0;
+
+    public WizardPage CurrentPage => this.Pages[currentPage];
+
+    public bool CanGoNext => this.currentPage < this.Pages.Count - 1;
+
+    public bool CanGoBack => this.currentPage > 0;
+
+    private List<WizardPage> Pages { get; } = new List<WizardPage>();
+
+    public void AddPage(WizardPage page)
+    {
+        this.Pages.Add(page);
+        this.StateHasChanged();
+    }
+
+    public void OnNext()
+    {
+        if (this.CanGoNext)
+            this.currentPage++;
+    }
+
+    public void OnBack()
+    {
+        if (this.CanGoBack)
+            this.currentPage--;
+    }
+}

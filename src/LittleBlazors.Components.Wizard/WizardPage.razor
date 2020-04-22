@@ -1,0 +1,19 @@
+﻿@if (this.Wizard.CurrentPage == this)
+{
+    @ChildContent
+}
+
+@code {
+    [CascadingParameter]
+    public Wizard Wizard { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Wizard.AddPage(this);
+
+        return base.OnInitializedAsync();
+    }
+}
