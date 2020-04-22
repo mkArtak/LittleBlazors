@@ -10,7 +10,7 @@
     protected Wizard Wizard { get; set; }
 
     [CascadingParameter]
-    protected WizardStateManager StateManager { get; set; }
+    protected IWizardStateManager StateManager { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -29,7 +29,7 @@
     {
         ForEachStateProperty((pi, sa) =>
         {
-            this.StateManager.Set(sa.Key, pi.GetValue(this));
+            this.StateManager.Set(GetStoreManagerKeyNameForProperty(sa, pi), pi.GetValue(this));
         });
     }
 
@@ -37,11 +37,16 @@
     {
         ForEachStateProperty((pi, sa) =>
         {
-            if (this.StateManager.TryGet(sa.Key, out var value))
+            if (this.StateManager.TryGet(GetStoreManagerKeyNameForProperty(sa, pi), out var value))
             {
                 pi.SetValue(this, value);
             }
         });
+    }
+
+    private static string GetStoreManagerKeyNameForProperty(StateAttribute sa, PropertyInfo pi)
+    {
+        return sa.Key ?? pi.Name;
     }
 
     /// <summary>

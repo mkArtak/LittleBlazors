@@ -25,7 +25,7 @@
 
     internal WizardPage CurrentPage => this.Pages[currentPage];
 
-    internal WizardStateManager StateManager { get; } = new WizardStateManager();
+    internal IWizardStateManager StateManager { get; } = new WizardStateManager();
 
     private bool CanGoNext => this.currentPage < this.Pages.Count - 1;
 

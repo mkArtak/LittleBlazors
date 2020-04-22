@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LittleBlazors.Components.Wizards
 {
-    public class WizardStateManager
+    internal class WizardStateManager : IWizardStateManager
     {
         private IDictionary<string, object> state = new Dictionary<string, object>();
 

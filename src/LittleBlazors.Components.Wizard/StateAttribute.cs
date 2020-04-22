@@ -7,7 +7,15 @@ namespace LittleBlazors.Components.Wizards
     {
         public string Key { get; }
 
-        // This is a positional argument
+
+        /// <summary>
+        /// The key will match the property name this attribute is applied to.
+        /// </summary>
+        public StateAttribute()
+        {
+
+        }
+
         public StateAttribute(string key)
         {
             this.Key = key;
