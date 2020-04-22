@@ -1,9 +1,12 @@
 ﻿@inherits LittleBlazors.Components.Wizards.WizardPage
 @using LittleBlazors.Components.Wizards;
 
-<h3>GetDetailsForm</h3>
+@if (this.IsPageActive)
+{
+    <h3>GetDetailsForm</h3>
 
-<input type="text" @bind="Text" />
+    <input type="text" @bind="Text" />
+}
 
 @code {
     [State("text")]

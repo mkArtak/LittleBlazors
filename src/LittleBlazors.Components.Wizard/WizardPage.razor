@@ -1,13 +1,11 @@
 ﻿@using System.Reflection
 
-@ChildContent
+@if (this.IsPageActive)
+{
+    @ChildContent
+}
 
 @code {
-    protected override bool ShouldRender()
-    {
-        return this.Wizard.CurrentPage == this;
-    }
-
     [CascadingParameter]
     protected Wizard Wizard { get; set; }
 
@@ -45,6 +43,13 @@
             }
         });
     }
+
+    /// <summary>
+    /// Indicates whether the page is currently active in the wizard or not.
+    /// Rendering of each page depends on this flag. If the value is `false`, no content should be rendered.
+    /// This is important for pages, which derieve from the <see cref="WizardPage"/> component.
+    /// </summary>
+    protected bool IsPageActive => this.Wizard.CurrentPage == this;
 
     private void ForEachStateProperty(Action<PropertyInfo, StateAttribute>
     handler)

@@ -23,13 +23,13 @@
 
     private int currentPage = 0;
 
-    public WizardPage CurrentPage => this.Pages[currentPage];
+    internal WizardPage CurrentPage => this.Pages[currentPage];
 
     internal WizardStateManager StateManager { get; } = new WizardStateManager();
 
-    public bool CanGoNext => this.currentPage < this.Pages.Count - 1;
+    private bool CanGoNext => this.currentPage < this.Pages.Count - 1;
 
-    public bool CanGoBack => this.currentPage > 0;
+    private bool CanGoBack => this.currentPage > 0;
 
     private List<WizardPage> Pages { get; } = new List<WizardPage>();
 
