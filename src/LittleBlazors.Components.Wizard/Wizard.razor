@@ -1,7 +1,9 @@
 ﻿
 <div>
     <CascadingValue Value="this">
-        @ChildContent
+        <CascadingValue Value="StateManager">
+            @ChildContent
+        </CascadingValue>
     </CascadingValue>
 </div>
 
@@ -23,6 +25,8 @@
 
     public WizardPage CurrentPage => this.Pages[currentPage];
 
+    internal WizardStateManager StateManager { get; } = new WizardStateManager();
+
     public bool CanGoNext => this.currentPage < this.Pages.Count - 1;
 
     public bool CanGoBack => this.currentPage > 0;
@@ -38,12 +42,19 @@
     public void OnNext()
     {
         if (this.CanGoNext)
-            this.currentPage++;
+            this.TurnToPage(this.currentPage + 1);
     }
 
     public void OnBack()
     {
         if (this.CanGoBack)
-            this.currentPage--;
+            this.TurnToPage(this.currentPage - 1);
+    }
+
+    private void TurnToPage(int page)
+    {
+        this.CurrentPage.StoreState();
+        this.currentPage = page;
+        this.CurrentPage.RestoreState();
     }
 }

@@ -1,19 +1,63 @@
-﻿@if (this.Wizard.CurrentPage == this)
-{
-    @ChildContent
-}
+﻿@using System.Reflection
+
+@ChildContent
 
 @code {
+    protected override bool ShouldRender()
+    {
+        return this.Wizard.CurrentPage == this;
+    }
+
     [CascadingParameter]
-    public Wizard Wizard { get; set; }
+    protected Wizard Wizard { get; set; }
+
+    [CascadingParameter]
+    protected WizardStateManager StateManager { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
 
     protected override Task OnInitializedAsync()
     {
         this.Wizard.AddPage(this);
 
         return base.OnInitializedAsync();
+    }
+
+    public void StoreState()
+    {
+        ForEachStateProperty((pi, sa) =>
+        {
+            this.StateManager.Set(sa.Key, pi.GetValue(this));
+        });
+    }
+
+    public void RestoreState()
+    {
+        ForEachStateProperty((pi, sa) =>
+        {
+            if (this.StateManager.TryGet(sa.Key, out var value))
+            {
+                pi.SetValue(this, value);
+            }
+        });
+    }
+
+    private void ForEachStateProperty(Action<PropertyInfo, StateAttribute>
+    handler)
+    {
+        var stateProps = this.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty);
+        foreach (var prop in stateProps)
+        {
+            var stateAttribute = prop.GetCustomAttributes<StateAttribute>
+                ().SingleOrDefault();
+            if (stateAttribute == null)
+                continue;
+
+            handler(prop, stateAttribute);
+        }
     }
 }

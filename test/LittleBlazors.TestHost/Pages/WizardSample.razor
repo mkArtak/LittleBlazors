@@ -2,16 +2,15 @@
 @using LittleBlazors.Components.Wizards;
 @using LittleBlazors.TestHost.Utilities;
 
-
 <h1>Wizard component sample</h1>
 
-
 <Wizard>
-    <WizardPage>page 1</WizardPage>
-    <WizardPage>
+    <WizardPage Title="Page1">page 1</WizardPage>
+    <WizardPage Title="Page2">
         <div style="background-color: red; height: 200px; width: 150px;"></div>
     </WizardPage>
-    <WizardPage>Final page</WizardPage>
+    <WizardPage Title="Page3">Final page</WizardPage>
+    <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
 </Wizard>
 
 @code{ } 
