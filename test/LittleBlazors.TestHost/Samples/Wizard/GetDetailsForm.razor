@@ -6,14 +6,15 @@
     <h3>GetDetailsForm</h3>
 
     <input type="text" @bind="Text" />
+    <button @onclick="HandleClick">Submit</button>
 }
 
 @code {
     [State]
     private string Text { get; set; }
 
-    protected override Task OnInitializedAsync()
+    private async Task HandleClick()
     {
-        return base.OnInitializedAsync();
+        await this.Wizard.NavigateForward();
     }
 }

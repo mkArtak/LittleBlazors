@@ -22,15 +22,29 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// Specifies whether the wizard supports a notion of completion or not.
+    /// If yes, the `Next` button will show as `Finish` when on the last page.
+    /// The <see cref="OnComplete"/> callback will fire only when this property is value is `true`.
+    /// </summary>
     [Parameter]
     public bool SupportCompletion { get; set; } = false;
 
+    /// <summary>
+    /// Fired when the user passes beyond the last page of the wizard, only when the <see cref="SupportCompletion"/> is `truee`.
+    /// </summary>
     [Parameter]
     public EventCallback<IWizardStateManager> OnComplete { get; set; }
 
+    /// <summary>
+    /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
+    /// </summary>
     [Parameter]
     public string FooterContainerClassName { get; set; } //= "wizardFooterContainer";
 
+    /// <summary>
+    /// Specifies the css class name of the pages container
+    /// </summary>
     [Parameter]
     public string WizardPageContainerClassName { get; set; } //= "wizardPageContainerClassName";
 
@@ -68,6 +82,8 @@
             this.CurrentPage.StoreState();
             await this.OnComplete.InvokeAsync(this.StateManager);
         }
+
+        this.StateHasChanged();
     }
 
     /// <summary>
@@ -76,7 +92,10 @@
     public async Task NavigateBack()
     {
         if (this.CanGoBack)
+        {
             await this.TurnToPage(this.currentPage - 1);
+            this.StateHasChanged();
+        }
     }
 
     private async Task TurnToPage(int page)

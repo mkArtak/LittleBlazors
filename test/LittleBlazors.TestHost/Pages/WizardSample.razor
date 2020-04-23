@@ -6,14 +6,14 @@
 
 @if (this.ShowWizard)
 {
-    <Wizard OnComplete="OnWizardComplete" SupportCompletion="true">
-        <WizardPage Title="Page1">page 1</WizardPage>
-        <WizardPage Title="Page2">
-            <div style="background-color: red; height: 200px; width: 150px;"></div>
-        </WizardPage>
-        <WizardPage Title="Page3">Final page</WizardPage>
-        <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
-    </Wizard>
+<Wizard OnComplete="OnWizardComplete" SupportCompletion="true">
+    <WizardPage Title="Page1">page 1</WizardPage>
+    <WizardPage Title="Page2">
+        <div style="background-color: red; height: 200px; width: 150px;"></div>
+    </WizardPage>
+    <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
+    <WizardPage Title="Page3">Final page</WizardPage>
+</Wizard>
 }
 else
 {

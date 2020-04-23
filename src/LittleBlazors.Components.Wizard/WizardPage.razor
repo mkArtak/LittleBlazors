@@ -6,11 +6,14 @@
 }
 
 @code {
+    /// <summary>
+    /// Gets the wizard in which current page is loaded.
+    /// </summary>
     [CascadingParameter]
-    protected Wizard Wizard { get; set; }
+    protected Wizard Wizard { get; private set; }
 
     /// <summary>
-    /// Gets the
+    /// Gets the state manager of the wizard.
     /// </summary>
     [CascadingParameter]
     protected IWizardStateManager StateManager { get; private set; }
