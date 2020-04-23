@@ -1,5 +1,4 @@
-﻿
-<div>
+﻿<div class="@WizardPageContainerClassName">
     <CascadingValue Value="this">
         <CascadingValue Value="StateManager">
             @ChildContent
@@ -7,19 +6,27 @@
     </CascadingValue>
 </div>
 
-@if (this.CanGoBack)
-{
-    <button id="btnNext" @onclick="OnBack">Back</button>
-}
+<div class="@FooterContainerClassName">
+    @if (this.CanGoBack)
+    {
+        <button id="btnNext" @onclick="OnBack">Back</button>
+    }
 
-@if (this.CanGoNext)
-{
-    <button id="btnNext" @onclick="OnNext">Next</button>
-}
+    @if (this.CanGoNext)
+    {
+        <button id="btnNext" @onclick="OnNext">Next</button>
+    }
+</div>
 
 @code{
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string FooterContainerClassName { get; set; } //= "wizardFooterContainer";
+
+    [Parameter]
+    public string WizardPageContainerClassName { get; set; } //= "wizardPageContainerClassName";
 
     private int currentPage = 0;
 
