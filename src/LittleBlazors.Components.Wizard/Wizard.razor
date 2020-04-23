@@ -9,12 +9,12 @@
 <div class="@FooterContainerClassName">
     @if (this.CanGoBack)
     {
-        <button id="btnNext" @onclick="OnBack">Back</button>
+        <button id="btnNext" @onclick="NavigateBack">Back</button>
     }
 
     @if (this.CanGoNext || this.SupportCompletion)
     {
-        <button id="btnNext" @onclick="OnNext">@NextButtonTitle</button>
+        <button id="btnNext" @onclick="NavigateForward">@NextButtonTitle</button>
     }
 </div>
 
@@ -48,16 +48,21 @@
 
     private List<WizardPage> Pages { get; } = new List<WizardPage>();
 
-    public void AddPage(WizardPage page)
+    internal void AddPage(WizardPage page)
     {
         this.Pages.Add(page);
         this.StateHasChanged();
     }
 
-    public async Task OnNext()
+    /// <summary>
+    /// Navigates to the next page of the wizard.
+    /// If currently at the last page and <see cref="SupportCompletion"/> is true, then the completion event will be triggered.
+    /// Otherwise, the navigation will result in no action.
+    /// </summary>
+    public async Task NavigateForward()
     {
         if (this.CanGoNext)
-            this.TurnToPage(this.currentPage + 1);
+            await this.TurnToPage(this.currentPage + 1);
         else
         {
             this.CurrentPage.StoreState();
@@ -65,16 +70,20 @@
         }
     }
 
-    public void OnBack()
+    /// <summary>
+    /// Navigates to the previous page of the wizard, if not at the first page.
+    /// </summary>
+    public async Task NavigateBack()
     {
         if (this.CanGoBack)
-            this.TurnToPage(this.currentPage - 1);
+            await this.TurnToPage(this.currentPage - 1);
     }
 
-    private void TurnToPage(int page)
+    private async Task TurnToPage(int page)
     {
         this.CurrentPage.StoreState();
+        await this.CurrentPage.OnNavigatingAway();
         this.currentPage = page;
-        this.CurrentPage.RestoreState();
+        await this.CurrentPage.OnNavigatedTo();
     }
 }

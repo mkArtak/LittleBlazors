@@ -9,8 +9,11 @@
     [CascadingParameter]
     protected Wizard Wizard { get; set; }
 
+    /// <summary>
+    /// Gets the
+    /// </summary>
     [CascadingParameter]
-    protected IWizardStateManager StateManager { get; set; }
+    protected IWizardStateManager StateManager { get; private set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -33,17 +36,6 @@
         });
     }
 
-    internal void RestoreState()
-    {
-        ForEachStateProperty((pi, sa) =>
-        {
-            if (this.StateManager.TryGet(GetStoreManagerKeyNameForProperty(sa, pi), out var value))
-            {
-                pi.SetValue(this, value);
-            }
-        });
-    }
-
     private static string GetStoreManagerKeyNameForProperty(StateAttribute sa, PropertyInfo pi)
     {
         return sa.Key ?? pi.Name;
@@ -59,7 +51,7 @@
     private void ForEachStateProperty(Action<PropertyInfo, StateAttribute>
     handler)
     {
-        var stateProps = this.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty);
+        var stateProps = this.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
         foreach (var prop in stateProps)
         {
             var stateAttribute = prop.GetCustomAttributes<StateAttribute>
@@ -69,5 +61,21 @@
 
             handler(prop, stateAttribute);
         }
+    }
+
+    /// <summary>
+    /// Called when the page is activated.
+    /// </summary>
+    protected internal virtual Task OnNavigatedTo()
+    {
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Called when the current page is active and the wizard is about to change to a different page.
+    /// </summary>
+    protected internal virtual Task OnNavigatingAway()
+    {
+        return Task.CompletedTask;
     }
 }
