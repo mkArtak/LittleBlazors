@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.2.0-alpha</Version>
+    <Version>0.0.3.0-alpha</Version>
     <Description>Wizard control implementation for Blazor</Description>
     <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
-    <PackageTags>blazor component wizard</PackageTags>
+    <PackageTags>Blazor wizard component</PackageTags>
     <Authors>mkArtak</Authors>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
