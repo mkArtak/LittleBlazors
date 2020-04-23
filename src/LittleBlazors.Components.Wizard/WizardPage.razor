@@ -25,7 +25,7 @@
         return base.OnInitializedAsync();
     }
 
-    public void StoreState()
+    internal void StoreState()
     {
         ForEachStateProperty((pi, sa) =>
         {
@@ -33,7 +33,7 @@
         });
     }
 
-    public void RestoreState()
+    internal void RestoreState()
     {
         ForEachStateProperty((pi, sa) =>
         {

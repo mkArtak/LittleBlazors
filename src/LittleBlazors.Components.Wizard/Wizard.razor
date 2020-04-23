@@ -12,15 +12,21 @@
         <button id="btnNext" @onclick="OnBack">Back</button>
     }
 
-    @if (this.CanGoNext)
+    @if (this.CanGoNext || this.SupportCompletion)
     {
-        <button id="btnNext" @onclick="OnNext">Next</button>
+        <button id="btnNext" @onclick="OnNext">@NextButtonTitle</button>
     }
 </div>
 
 @code{
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool SupportCompletion { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<IWizardStateManager> OnComplete { get; set; }
 
     [Parameter]
     public string FooterContainerClassName { get; set; } //= "wizardFooterContainer";
@@ -38,6 +44,8 @@
 
     private bool CanGoBack => this.currentPage > 0;
 
+    private string NextButtonTitle => CanGoNext ? "Next" : "Finish";
+
     private List<WizardPage> Pages { get; } = new List<WizardPage>();
 
     public void AddPage(WizardPage page)
@@ -46,10 +54,15 @@
         this.StateHasChanged();
     }
 
-    public void OnNext()
+    public async Task OnNext()
     {
         if (this.CanGoNext)
             this.TurnToPage(this.currentPage + 1);
+        else
+        {
+            this.CurrentPage.StoreState();
+            await this.OnComplete.InvokeAsync(this.StateManager);
+        }
     }
 
     public void OnBack()

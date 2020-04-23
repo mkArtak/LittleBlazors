@@ -4,13 +4,36 @@
 
 <h1>Wizard component sample</h1>
 
-<Wizard>
-    <WizardPage Title="Page1">page 1</WizardPage>
-    <WizardPage Title="Page2">
-        <div style="background-color: red; height: 200px; width: 150px;"></div>
-    </WizardPage>
-    <WizardPage Title="Page3">Final page</WizardPage>
-    <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
-</Wizard>
+@if (this.ShowWizard)
+{
+    <Wizard OnComplete="OnWizardComplete" SupportCompletion="true">
+        <WizardPage Title="Page1">page 1</WizardPage>
+        <WizardPage Title="Page2">
+            <div style="background-color: red; height: 200px; width: 150px;"></div>
+        </WizardPage>
+        <WizardPage Title="Page3">Final page</WizardPage>
+        <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
+    </Wizard>
+}
+else
+{
+    <textarea @bind="Text" />
+}
 
-@code{ } 
+@code{
+    public string Text { get; set; }
+
+    public bool ShowWizard { get; set; } = true;
+
+    protected Task OnWizardComplete(IWizardStateManager stateManager)
+    {
+        this.ShowWizard = false;
+
+        if (stateManager.TryGet("Text", out var value))
+        {
+            this.Text = "The wizard has completed with value: " + (string)value;
+        }
+
+        return Task.CompletedTask;
+    }
+}

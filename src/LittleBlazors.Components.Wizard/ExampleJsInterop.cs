@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace LittleBlazors.Components.Wizards
 {
-    public class ExampleJsInterop
+    internal class ExampleJsInterop
     {
         public static ValueTask<string> Prompt(IJSRuntime jsRuntime, string message)
         {
