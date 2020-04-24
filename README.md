@@ -1,4 +1,10 @@
-# LittleBlazors
+# LittleBlazors Component Library
+
+For now this library encapsulates two sets of controls:
+- charts
+- [wizard](https://github.com/mkArtak/LittleBlazors/wiki/Wizard-control)
+
+The below writeup is about the charts only. To read more about the Wizard control and how to use it go to the [Wiki page](https://github.com/mkArtak/LittleBlazors/wiki/Wizard-control).
 
 The LittleBlazors library is essentially a wrapper around the [Google Charts](https://developers.google.com/chart/) library, to make it simple for Blazor developers to use charts in their Blazor apps.
 I've just started on this journey and plan to slowly cover all the charts.
