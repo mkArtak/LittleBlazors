@@ -24,11 +24,11 @@
     [Parameter]
     public string Title { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         this.Wizard.AddPage(this);
 
-        return base.OnInitializedAsync();
+        base.OnInitialized();
     }
 
     internal void StoreState()

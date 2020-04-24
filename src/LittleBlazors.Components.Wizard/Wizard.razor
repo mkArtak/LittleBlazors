@@ -1,4 +1,7 @@
-﻿<div class="@WizardPageContainerClassName">
+﻿@using Microsoft.Extensions.Logging
+@inject ILogger<Wizard> logger  
+
+<div class="@WizardPageContainerClassName">
     <CascadingValue Value="this">
         <CascadingValue Value="StateManager">
             @ChildContent
@@ -64,6 +67,7 @@
 
     internal void AddPage(WizardPage page)
     {
+        this.logger.LogDebug($"Adding page {page.Title} to wizard");
         this.Pages.Add(page);
         this.StateHasChanged();
     }
