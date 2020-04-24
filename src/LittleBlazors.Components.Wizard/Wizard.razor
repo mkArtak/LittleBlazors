@@ -1,5 +1,5 @@
 ﻿@using Microsoft.Extensions.Logging
-@inject ILogger<Wizard> logger  
+@inject ILogger<Wizard> logger
 
 <div class="@WizardPageContainerClassName">
     <CascadingValue Value="this">
@@ -12,12 +12,16 @@
 <div class="@FooterContainerClassName">
     @if (this.CanGoBack)
     {
-        <button id="btnNext" @onclick="NavigateBack">Back</button>
+        <button @onclick="NavigateBack" class="@BackButtonClassName">@BackButtonTitle</button>
     }
 
-    @if (this.CanGoNext || this.SupportCompletion)
+    @if (this.CanGoNext)
     {
-        <button id="btnNext" @onclick="NavigateForward">@NextButtonTitle</button>
+        <button @onclick="NavigateForward" class="@NextButtonClassName">@NextButtonTitle</button>
+    }
+    else if (this.SupportCompletion)
+    {
+        <button @onclick="CompleteWizard" class="@FinishButtonClassName">@FinishButtonTitle</button>
     }
 </div>
 
@@ -46,6 +50,42 @@
     public string FooterContainerClassName { get; set; } //= "wizardFooterContainer";
 
     /// <summary>
+    /// Specifies the css class to apply to the `Back` button
+    /// </summary>
+    [Parameter]
+    public string BackButtonClassName { get; set; }
+
+    /// <summary>
+    /// Specifies the css class to apply to the `Next` button
+    /// </summary>
+    [Parameter]
+    public string NextButtonClassName { get; set; }
+
+    /// <summary>
+    /// Specifies the css class to apply to the `Finish` button
+    /// </summary>
+    [Parameter]
+    public string FinishButtonClassName { get; set; }
+
+    /// <summary>
+    /// Specifies the label of the `Back` button
+    /// </summary>
+    [Parameter]
+    public string BackButtonTitle { get; set; } = "Back";
+
+    /// <summary>
+    /// Specifies the label of the `Next` button
+    /// </summary>
+    [Parameter]
+    public string NextButtonTitle { get; set; } = "Next";
+
+    /// <summary>
+    /// Specifies the label of the `Finish` button
+    /// </summary>
+    [Parameter]
+    public string FinishButtonTitle { get; set; } = "Finish";
+
+    /// <summary>
     /// Specifies the css class name of the pages container
     /// </summary>
     [Parameter]
@@ -61,8 +101,6 @@
 
     private bool CanGoBack => this.currentPage > 0;
 
-    private string NextButtonTitle => CanGoNext ? "Next" : "Finish";
-
     private List<WizardPage> Pages { get; } = new List<WizardPage>();
 
     internal void AddPage(WizardPage page)
@@ -77,29 +115,36 @@
     /// If currently at the last page and <see cref="SupportCompletion"/> is true, then the completion event will be triggered.
     /// Otherwise, the navigation will result in no action.
     /// </summary>
-    public async Task NavigateForward()
+    public async Task<bool> NavigateForward()
     {
-        if (this.CanGoNext)
-            await this.TurnToPage(this.currentPage + 1);
-        else
-        {
-            this.CurrentPage.StoreState();
-            await this.OnComplete.InvokeAsync(this.StateManager);
-        }
+        if (!this.CanGoNext)
+            return false;
 
+        await this.TurnToPage(this.currentPage + 1);
         this.StateHasChanged();
+
+        return true;
     }
 
     /// <summary>
     /// Navigates to the previous page of the wizard, if not at the first page.
     /// </summary>
-    public async Task NavigateBack()
+    public async Task<bool> NavigateBack()
     {
-        if (this.CanGoBack)
-        {
-            await this.TurnToPage(this.currentPage - 1);
-            this.StateHasChanged();
-        }
+        if (!this.CanGoBack)
+            return false;
+
+        await this.TurnToPage(this.currentPage - 1);
+        this.StateHasChanged();
+
+        return true;
+    }
+
+    private async Task CompleteWizard()
+    {
+        this.CurrentPage.StoreState();
+        await this.OnComplete.InvokeAsync(this.StateManager);
+        this.StateHasChanged();
     }
 
     private async Task TurnToPage(int page)
