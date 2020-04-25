@@ -1,4 +1,6 @@
 ﻿@using Microsoft.Extensions.Logging
+@using LittleBlazors.Components.Core;
+
 @inject ILogger<Wizard> logger
 
 <div class="@WizardPageContainerClassName">
@@ -10,18 +12,21 @@
 </div>
 
 <div class="@FooterContainerClassName">
-    @if (this.CanGoBack)
+    @if (this.CanGoBack && this.BackButtonStyle.Visible)
     {
-        <button @onclick="NavigateBack" class="@BackButtonClassName">@BackButtonTitle</button>
+        <button @onclick="NavigateBack" class="@BackButtonStyle.CssClassName">@BackButtonStyle.Title</button>
     }
 
     @if (this.CanGoNext)
     {
-        <button @onclick="NavigateForward" class="@NextButtonClassName">@NextButtonTitle</button>
+        if (NextButtonStyle.Visible)
+        {
+           <button @onclick="NavigateForward" class="@NextButtonStyle.CssClassName">@NextButtonStyle.Title</button>
+        }
     }
-    else if (this.SupportCompletion)
+    else if (this.SupportCompletion && this.FinishButtonStyle.Visible)
     {
-        <button @onclick="CompleteWizard" class="@FinishButtonClassName">@FinishButtonTitle</button>
+        <button @onclick="CompleteWizard" class="@FinishButtonStyle.CssClassName">@FinishButtonStyle.Title</button>
     }
 </div>
 
@@ -47,49 +52,31 @@
     /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
     /// </summary>
     [Parameter]
-    public string FooterContainerClassName { get; set; } //= "wizardFooterContainer";
+    public string FooterContainerClassName { get; set; }
 
     /// <summary>
-    /// Specifies the css class to apply to the `Back` button
+    /// Specifies the styles to apply to the `Back` button.
     /// </summary>
     [Parameter]
-    public string BackButtonClassName { get; set; }
+    public ButtonStyle BackButtonStyle { get; set; } = new ButtonStyle("Back", null);
 
     /// <summary>
-    /// Specifies the css class to apply to the `Next` button
+    /// Specifies the styles to apply to the `Next` button.
     /// </summary>
     [Parameter]
-    public string NextButtonClassName { get; set; }
+    public ButtonStyle NextButtonStyle { get; set; } = new ButtonStyle("Next", null);
 
     /// <summary>
-    /// Specifies the css class to apply to the `Finish` button
-    /// </summary>
+    /// Specifies the styles to apply to the `Finish` button.
+    /// </ summary >
     [Parameter]
-    public string FinishButtonClassName { get; set; }
-
-    /// <summary>
-    /// Specifies the label of the `Back` button
-    /// </summary>
-    [Parameter]
-    public string BackButtonTitle { get; set; } = "Back";
-
-    /// <summary>
-    /// Specifies the label of the `Next` button
-    /// </summary>
-    [Parameter]
-    public string NextButtonTitle { get; set; } = "Next";
-
-    /// <summary>
-    /// Specifies the label of the `Finish` button
-    /// </summary>
-    [Parameter]
-    public string FinishButtonTitle { get; set; } = "Finish";
+    public ButtonStyle FinishButtonStyle { get; set; } = new ButtonStyle("Finish", null);
 
     /// <summary>
     /// Specifies the css class name of the pages container
     /// </summary>
     [Parameter]
-    public string WizardPageContainerClassName { get; set; } //= "wizardPageContainerClassName";
+    public string WizardPageContainerClassName { get; set; }
 
     private int currentPage = 0;
 
@@ -112,7 +99,7 @@
 
     /// <summary>
     /// Navigates to the next page of the wizard.
-    /// If currently at the last page and <see cref="SupportCompletion"/> is true, then the completion event will be triggered.
+    /// If currently at the last page and <see cref="SupportCompletion" /> is true, then the completion event will be triggered.
     /// Otherwise, the navigation will result in no action.
     /// </summary>
     public async Task<bool> NavigateForward()

@@ -1,12 +1,13 @@
 ﻿@page "/wizard"
 @using LittleBlazors.Components.Wizards;
+@using LittleBlazors.Components.Core.Extensions; 
 @using LittleBlazors.TestHost.Utilities;
 
 <h1>Wizard component sample</h1>
 
 @if (this.ShowWizard)
 {
-<Wizard OnComplete="OnWizardComplete" SupportCompletion="true">
+<Wizard OnComplete="OnWizardComplete" SupportCompletion="true" NextButtonStyle="NextButtonStyle">
     <WizardPage Title="Page1">page 1</WizardPage>
     <WizardPage Title="Page2">
         <div style="background-color: red; height: 200px; width: 150px;"></div>
@@ -14,6 +15,8 @@
     <LittleBlazors.TestHost.Samples.Wizard.GetDetailsForm Title="page 4" />
     <WizardPage Title="Page3">Final page</WizardPage>
 </Wizard>
+
+<button @onclick="UpdateStyle">Update next button title</button>
 }
 else
 {
@@ -21,6 +24,13 @@ else
 }
 
 @code{
+    private LittleBlazors.Components.Core.ButtonStyle NextButtonStyle { get; set; } = new Components.Core.ButtonStyle("Next", null);
+
+    private void UpdateStyle()
+    {
+        this.NextButtonStyle = this.NextButtonStyle.Title(DateTime.Now.Second.ToString());
+    }
+
     public string Text { get; set; }
 
     public bool ShowWizard { get; set; } = true;

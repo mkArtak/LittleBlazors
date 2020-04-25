@@ -1,10 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.3.2-alpha</Version>
+    <Version>0.0.3.3-alpha</Version>
     <Description>Wizard control implementation for Blazor</Description>
     <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
@@ -14,18 +13,20 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.3" />
   </ItemGroup>
-
 
   <ItemGroup>
     <None Include="..\..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LittleBlazors.Components.Core\LittleBlazors.Components.Core.csproj" />
   </ItemGroup>
 
 </Project>
