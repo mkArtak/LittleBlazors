@@ -7,13 +7,11 @@ namespace LittleBlazors.Components.Wizards
     {
         public string Key { get; }
 
-
         /// <summary>
         /// The key will match the property name this attribute is applied to.
         /// </summary>
         public StateAttribute()
         {
-
         }
 
         public StateAttribute(string key)

@@ -1,6 +1,7 @@
 ﻿@using Microsoft.Extensions.Logging
 @using LittleBlazors.Components.Core
 @using LittleBlazors.Components.Wizards.Components
+@using LittleBlazors.Components.Wizards
 
 @inject ILogger<Wizard> logger
 
@@ -8,6 +9,7 @@
     <CascadingValue Value="this">
         <CascadingValue Value="StateManager">
             @ChildContent
+            <MarkerWizardPage />
         </CascadingValue>
     </CascadingValue>
 </div>
@@ -47,16 +49,16 @@
     public EventCallback<IWizardStateManager> OnComplete { get; set; }
 
     /// <summary>
-    /// Fired when the wizar is about to leave the current page to a different one
+    /// Fired when the wizard page is about to be loaded
     /// </summary>
     [Parameter]
-    public EventCallback<WizardPage> OnPageChanging { get; set; }
+    public EventCallback<WizardPage> OnPageLoading { get; set; }
 
     /// <summary>
-    /// Fired when wizard has just changed the active page
+    /// Fired when a wizard page is about to be unloaded
     /// </summary>
     [Parameter]
-    public EventCallback<WizardPage> OnPageChanged { get; set; }
+    public EventCallback<WizardPage> OnPageUnloading { get; set; }
 
     /// <summary>
     /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
@@ -102,8 +104,12 @@
 
     internal void AddPage(WizardPage page)
     {
+        if (page is MarkerWizardPage)
+            return;
+
         this.logger.LogDebug($"Adding page {page.Title} to wizard");
         this.Pages.Add(page);
+
         this.StateHasChanged();
     }
 
@@ -137,6 +143,12 @@
         return true;
     }
 
+    internal async Task AllPagesLoaded()
+    {
+        if (this.Pages.Any())
+            await this.OnPageLoading.InvokeAsync(this.Pages[0]);
+    }
+
     private async Task CompleteWizard()
     {
         this.CurrentPage.StoreState();
@@ -148,9 +160,9 @@
     {
         this.CurrentPage.StoreState();
         await this.CurrentPage.OnNavigatingAway();
-        await this.OnPageChanging.InvokeAsync(this.CurrentPage);
+        await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
         this.currentPage = page;
         await this.CurrentPage.OnNavigatedTo();
-        await this.OnPageChanged.InvokeAsync(this.CurrentPage);
+        await this.OnPageLoading.InvokeAsync(this.CurrentPage);
     }
 }

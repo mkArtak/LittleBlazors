@@ -7,7 +7,7 @@
 
 @if (this.ShowWizard)
 {
-<Wizard OnComplete="OnWizardComplete" SupportCompletion="true" NextButtonStyle="NextButtonStyle" OnPageChanged="OnPageChanged">
+<Wizard OnComplete="OnWizardComplete" SupportCompletion="true" NextButtonStyle="NextButtonStyle" OnPageLoading="OnPageLoading">
     <WizardPage Title="Page1">page 1</WizardPage>
     <WizardPage Title="Page2">
         <div style="background-color: red; height: 200px; width: 150px;"></div>
@@ -31,7 +31,7 @@ else
         this.NextButtonStyle = this.NextButtonStyle.Title(DateTime.Now.Second.ToString());
     }
 
-    private Task OnPageChanged(WizardPage page)
+    private Task OnPageLoading(WizardPage page)
     {
         UpdateStyle();
 
