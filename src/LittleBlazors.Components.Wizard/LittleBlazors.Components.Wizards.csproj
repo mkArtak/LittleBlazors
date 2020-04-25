@@ -2,8 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.3.3-alpha</Version>
+    <Version>0.0.3.4-alpha</Version>
     <Description>Wizard control implementation for Blazor</Description>
     <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
@@ -11,6 +13,7 @@
     <Authors>mkArtak</Authors>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

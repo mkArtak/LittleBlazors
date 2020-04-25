@@ -3,5 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1.1-alpha</Version>
+    <Description>Core types used by the LittleBlazors.Components library</Description>
+    <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
+    <PackageTags>Blazor components LittleBlazors</PackageTags>
+    <Authors>mkArtak</Authors>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
 
 </Project>
