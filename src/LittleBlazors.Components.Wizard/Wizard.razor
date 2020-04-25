@@ -1,5 +1,6 @@
 ﻿@using Microsoft.Extensions.Logging
-@using LittleBlazors.Components.Core;
+@using LittleBlazors.Components.Core
+@using LittleBlazors.Components.Wizards.Components
 
 @inject ILogger<Wizard> logger
 
@@ -12,21 +13,18 @@
 </div>
 
 <div class="@FooterContainerClassName">
-    @if (this.CanGoBack && this.BackButtonStyle.Visible)
+    @if (this.CanGoBack)
     {
-        <button @onclick="NavigateBack" class="@BackButtonStyle.CssClassName">@BackButtonStyle.Title</button>
+        <StylableButton Style="BackButtonStyle" OnClick="NavigateBack" />
     }
 
     @if (this.CanGoNext)
     {
-        if (NextButtonStyle.Visible)
-        {
-           <button @onclick="NavigateForward" class="@NextButtonStyle.CssClassName">@NextButtonStyle.Title</button>
-        }
+        <StylableButton Style="NextButtonStyle" OnClick="NavigateForward" />
     }
-    else if (this.SupportCompletion && this.FinishButtonStyle.Visible)
+    else if (this.SupportCompletion)
     {
-        <button @onclick="CompleteWizard" class="@FinishButtonStyle.CssClassName">@FinishButtonStyle.Title</button>
+        <StylableButton Style="FinishButtonStyle" OnClick="CompleteWizard" />
     }
 </div>
 

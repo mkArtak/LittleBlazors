@@ -1,0 +1,17 @@
+﻿@using LittleBlazors.Components.Core;
+
+@if (Style.Visible)
+{
+    <button class="@Style.CssClassName" @onclick="OnButtonClick">@Style.Title</button>
+}
+
+@code {
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public ButtonStyle Style { get; set; }
+
+    private Task OnButtonClick() => OnClick.InvokeAsync(this);
+
+}
