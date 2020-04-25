@@ -47,6 +47,18 @@
     public EventCallback<IWizardStateManager> OnComplete { get; set; }
 
     /// <summary>
+    /// Fired when the wizar is about to leave the current page to a different one
+    /// </summary>
+    [Parameter]
+    public EventCallback<WizardPage> OnPageChanging { get; set; }
+
+    /// <summary>
+    /// Fired when wizard has just changed the active page
+    /// </summary>
+    [Parameter]
+    public EventCallback<WizardPage> OnPageChanged { get; set; }
+
+    /// <summary>
     /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
     /// </summary>
     [Parameter]
@@ -136,7 +148,9 @@
     {
         this.CurrentPage.StoreState();
         await this.CurrentPage.OnNavigatingAway();
+        await this.OnPageChanging.InvokeAsync(this.CurrentPage);
         this.currentPage = page;
         await this.CurrentPage.OnNavigatedTo();
+        await this.OnPageChanged.InvokeAsync(this.CurrentPage);
     }
 }
