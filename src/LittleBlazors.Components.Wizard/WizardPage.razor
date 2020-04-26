@@ -77,8 +77,9 @@
     /// <summary>
     /// Called when the current page is active and the wizard is about to change to a different page.
     /// </summary>
-    protected internal virtual Task OnNavigatingAway()
+    /// <returns>Return `true` to proceed with navigation. `false` to abort navigation</returns>
+    protected internal virtual Task<bool> OnNavigatingAway()
     {
-        return Task.CompletedTask;
+        return Task.FromResult(true);
     }
 }

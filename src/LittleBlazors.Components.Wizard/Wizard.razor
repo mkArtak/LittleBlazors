@@ -31,64 +31,64 @@
 </div>
 
 @code{
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
-    /// <summary>
-    /// Specifies whether the wizard supports a notion of completion or not.
-    /// If yes, the `Next` button will show as `Finish` when on the last page.
-    /// The <see cref="OnComplete"/> callback will fire only when this property is value is `true`.
-    /// </summary>
-    [Parameter]
-    public bool SupportCompletion { get; set; } = false;
+        /// <summary>
+        /// Specifies whether the wizard supports a notion of completion or not.
+        /// If yes, the `Next` button will show as `Finish` when on the last page.
+        /// The <see cref="OnComplete"/> callback will fire only when this property is value is `true`.
+        /// </summary>
+        [Parameter]
+        public bool SupportCompletion { get; set; } = false;
 
-    /// <summary>
-    /// Fired when the user passes beyond the last page of the wizard, only when the <see cref="SupportCompletion"/> is `truee`.
-    /// </summary>
-    [Parameter]
-    public EventCallback<IWizardStateManager> OnComplete { get; set; }
+        /// <summary>
+        /// Fired when the user passes beyond the last page of the wizard, only when the <see cref="SupportCompletion"/> is `truee`.
+        /// </summary>
+        [Parameter]
+        public EventCallback<IWizardStateManager> OnComplete { get; set; }
 
-    /// <summary>
-    /// Fired when the wizard page is about to be loaded
-    /// </summary>
-    [Parameter]
-    public EventCallback<WizardPage> OnPageLoading { get; set; }
+        /// <summary>
+        /// Fired when the wizard page is about to be loaded
+        /// </summary>
+        [Parameter]
+        public EventCallback<WizardPage> OnPageLoading { get; set; }
 
-    /// <summary>
-    /// Fired when a wizard page is about to be unloaded
-    /// </summary>
-    [Parameter]
-    public EventCallback<WizardPage> OnPageUnloading { get; set; }
+        /// <summary>
+        /// Fired when a wizard page is about to be unloaded
+        /// </summary>
+        [Parameter]
+        public EventCallback<WizardPage> OnPageUnloading { get; set; }
 
-    /// <summary>
-    /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
-    /// </summary>
-    [Parameter]
-    public string FooterContainerClassName { get; set; }
+        /// <summary>
+        /// Specifies the name of the css class to apply to the footer container, where the `back` and `next` buttons are
+        /// </summary>
+        [Parameter]
+        public string FooterContainerClassName { get; set; }
 
-    /// <summary>
-    /// Specifies the styles to apply to the `Back` button.
-    /// </summary>
-    [Parameter]
-    public ButtonStyle BackButtonStyle { get; set; } = new ButtonStyle("Back", null);
+        /// <summary>
+        /// Specifies the styles to apply to the `Back` button.
+        /// </summary>
+        [Parameter]
+        public ButtonStyle BackButtonStyle { get; set; } = new ButtonStyle("Back", null);
 
-    /// <summary>
-    /// Specifies the styles to apply to the `Next` button.
-    /// </summary>
-    [Parameter]
-    public ButtonStyle NextButtonStyle { get; set; } = new ButtonStyle("Next", null);
+        /// <summary>
+        /// Specifies the styles to apply to the `Next` button.
+        /// </summary>
+        [Parameter]
+        public ButtonStyle NextButtonStyle { get; set; } = new ButtonStyle("Next", null);
 
-    /// <summary>
-    /// Specifies the styles to apply to the `Finish` button.
-    /// </ summary >
-    [Parameter]
-    public ButtonStyle FinishButtonStyle { get; set; } = new ButtonStyle("Finish", null);
+        /// <summary>
+        /// Specifies the styles to apply to the `Finish` button.
+        /// </ summary >
+        [Parameter]
+        public ButtonStyle FinishButtonStyle { get; set; } = new ButtonStyle("Finish", null);
 
-    /// <summary>
-    /// Specifies the css class name of the pages container
-    /// </summary>
-    [Parameter]
-    public string WizardPageContainerClassName { get; set; }
+        /// <summary>
+        /// Specifies the css class name of the pages container
+        /// </summary>
+        [Parameter]
+        public string WizardPageContainerClassName { get; set; }
 
     private int currentPage = 0;
 
@@ -118,6 +118,7 @@
     /// If currently at the last page and <see cref="SupportCompletion" /> is true, then the completion event will be triggered.
     /// Otherwise, the navigation will result in no action.
     /// </summary>
+    /// <returns>true, if not on the last page of the wizard. false - otherwise.</returns>
     public async Task<bool> NavigateForward()
     {
         if (!this.CanGoNext)
@@ -159,10 +160,12 @@
     private async Task TurnToPage(int page)
     {
         this.CurrentPage.StoreState();
-        await this.CurrentPage.OnNavigatingAway();
-        await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
-        this.currentPage = page;
-        await this.CurrentPage.OnNavigatedTo();
-        await this.OnPageLoading.InvokeAsync(this.CurrentPage);
+        if (await this.CurrentPage.OnNavigatingAway())
+        {
+            await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
+            this.currentPage = page;
+            await this.CurrentPage.OnNavigatedTo();
+            await this.OnPageLoading.InvokeAsync(this.CurrentPage);
+        }
     }
 }
