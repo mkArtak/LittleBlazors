@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.4.1-alpha</Version>
+    <Version>0.0.5.0-alpha</Version>
     <Description>Wizard control implementation for Blazor</Description>
     <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>

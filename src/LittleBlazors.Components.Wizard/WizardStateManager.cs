@@ -15,5 +15,10 @@ namespace LittleBlazors.Components.Wizards
         {
             this.state[key] = value;
         }
+
+        public bool Remove(string key)
+        {
+            return state.Remove(key);
+        }
     }
 }
