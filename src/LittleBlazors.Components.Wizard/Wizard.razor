@@ -164,6 +164,7 @@
         {
             await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
             this.currentPage = page;
+            this.CurrentPage.RestoreState();
             await this.CurrentPage.OnNavigatedTo();
             await this.OnPageLoading.InvokeAsync(this.CurrentPage);
         }

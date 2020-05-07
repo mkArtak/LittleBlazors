@@ -33,10 +33,25 @@
 
     internal void StoreState()
     {
+        this.OnSaveState();
+
         ForEachStateProperty((pi, sa) =>
         {
             this.StateManager.Set(GetStoreManagerKeyNameForProperty(sa, pi), pi.GetValue(this));
         });
+    }
+
+    internal void RestoreState()
+    {
+        ForEachStateProperty((pi, sa) =>
+        {
+            if (this.StateManager.TryGet(GetStoreManagerKeyNameForProperty(sa, pi), out object value))
+            {
+                pi.SetValue(this, value);
+            }
+        });
+
+        this.OnStateRestored();
     }
 
     private static string GetStoreManagerKeyNameForProperty(StateAttribute sa, PropertyInfo pi)
@@ -72,6 +87,22 @@
     protected internal virtual Task OnNavigatedTo()
     {
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Invoked immediately after the state of the page got restored.
+    /// </summary>
+    protected virtual void OnStateRestored()
+    {
+
+    }
+
+    /// <summary>
+    /// Invoked immediately before the wizard page state is agoing to be stored.
+    /// </summary>
+    protected virtual void OnSaveState()
+    {
+
     }
 
     /// <summary>
