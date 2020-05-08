@@ -38,7 +38,7 @@
         ForEachStateProperty((pi, sa) =>
         {
             this.StateManager.Set(GetStoreManagerKeyNameForProperty(sa, pi), pi.GetValue(this));
-        });
+        }, false);
     }
 
     internal void RestoreState()
@@ -49,7 +49,7 @@
             {
                 pi.SetValue(this, value);
             }
-        });
+        }, true);
 
         this.OnStateRestored();
     }
@@ -67,7 +67,7 @@
     protected bool IsPageActive => this.Wizard.CurrentPage == this;
 
     private void ForEachStateProperty(Action<PropertyInfo, StateAttribute>
-    handler)
+    handler, bool includeReadOnly)
     {
         var stateProps = this.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
         foreach (var prop in stateProps)
@@ -77,7 +77,10 @@
             if (stateAttribute == null)
                 continue;
 
-            handler(prop, stateAttribute);
+            if (!stateAttribute.ReadOnly || includeReadOnly)
+            {
+                handler(prop, stateAttribute);
+            }
         }
     }
 
