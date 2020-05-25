@@ -1,0 +1,26 @@
+﻿<div class="my-component">
+    @for (var i = 0; i < this.CompletedStates; i++)
+    {
+        @CompletedStateTemplate
+    }
+
+    @for (var i = 0; i < this.TotalStates - this.CompletedStates; i++)
+    {
+        @IncompleteStateTemplate
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public int TotalStates { get; set; }
+
+    [Parameter]
+    public int CompletedStates { get; set; }
+
+    [Parameter]
+    public RenderFragment CompletedStateTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment IncompleteStateTemplate { get; set; }
+}

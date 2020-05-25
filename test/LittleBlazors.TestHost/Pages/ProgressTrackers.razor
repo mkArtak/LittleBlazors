@@ -1,0 +1,46 @@
+﻿@page "/progress"
+
+@using LittleBlazors.Components.ProgressTrackers
+
+<h3>ProgressTrackers</h3>
+
+<DiscreteProgressTracker TotalStates="@totalStates" CompletedStates="@completedStates">
+    <CompletedStateTemplate>
+        <div style="width: 10px; height: 20px; background-color: red; border: 1px solid white; float: left"></div>
+    </CompletedStateTemplate>
+    <IncompleteStateTemplate>
+        <div style="width: 10px; height: 20px; background-color: blue; border: 1px solid white; float: left"></div>
+    </IncompleteStateTemplate>
+</DiscreteProgressTracker>
+
+<br />
+
+<button @onclick="CompleteStep">Complete Step</button>
+<button @onclick="Reset">Reset</button>
+
+<button @onclick="@(() => totalStates++)">Increase progress bar</button>
+<button @onclick="DecreaseTotal">Decrease progress bar</button>
+
+@code {
+    private int completedStates = 0;
+    private int totalStates = 5;
+
+    private void CompleteStep()
+    {
+        if (this.completedStates < totalStates)
+            this.completedStates++;
+    }
+
+    private void Reset()
+    {
+        this.completedStates = 0;
+    }
+
+    private void DecreaseTotal()
+    {
+        if (this.totalStates> this.completedStates)
+        {
+            this.totalStates--;
+        }
+    }
+}

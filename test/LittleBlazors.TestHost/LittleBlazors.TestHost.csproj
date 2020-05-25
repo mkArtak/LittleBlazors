@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\LittleBlazors.Components.Charts\LittleBlazors.Components.Charts.csproj" />
+    <ProjectReference Include="..\..\src\LittleBlazors.Components.ProgressTrackers\LittleBlazors.Components.ProgressTrackers.csproj" />
     <ProjectReference Include="..\..\src\LittleBlazors.Components.Wizard\LittleBlazors.Components.Wizards.csproj" />
   </ItemGroup>
 
