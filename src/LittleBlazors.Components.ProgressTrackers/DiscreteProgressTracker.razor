@@ -4,7 +4,12 @@
         @CompletedStateTemplate
     }
 
-    @for (var i = 0; i < this.TotalStates - this.CompletedStates; i++)
+    @if (this.CompletedStates < this.TotalStates)
+    {
+        @CurrentStateTemlpate
+    }
+
+    @for (var i = 0; i < this.TotalStates - this.CompletedStates - 1; i++)
     {
         @IncompleteStateTemplate
     }
@@ -12,6 +17,8 @@
 
 @code
 {
+    private RenderFragment incompleteStateTemplate;
+
     [Parameter]
     public int TotalStates { get; set; }
 
@@ -22,5 +29,22 @@
     public RenderFragment CompletedStateTemplate { get; set; }
 
     [Parameter]
-    public RenderFragment IncompleteStateTemplate { get; set; }
+    public RenderFragment IncompleteStateTemplate
+    {
+        get => this.incompleteStateTemplate;
+        set
+        {
+            this.incompleteStateTemplate = value;
+            if (this.CurrentStateTemlpate == null)
+                this.CurrentStateTemlpate = value;
+        }
+    }
+
+    [Parameter]
+    public RenderFragment CurrentStateTemlpate { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 }
