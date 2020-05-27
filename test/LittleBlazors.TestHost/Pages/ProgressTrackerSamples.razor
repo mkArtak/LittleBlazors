@@ -14,18 +14,37 @@
 </DiscreteProgressTracker>
 
 <br />
-<DiscreteProgressTracker TotalSteps="@TotalSteps" CompletedSteps="@CompletedSteps">
-    <CompletedStepTemplate>
-        <div style="width: 10px; height: 20px; background-color: red; border: 1px solid white; float: left"></div>
-    </CompletedStepTemplate>
-    <IncompleteStepTemplate>
-        <div style="width: 10px; height: 20px; background-color: blue; border: 1px solid white; float: left"></div>
-    </IncompleteStepTemplate>
-    <CurrentStepTemlpate>
-        <div style="width: 10px; height: 20px; background-color: yellow; border: 1px solid white; float: left"></div>
-    </CurrentStepTemlpate>
-</DiscreteProgressTracker>
+<div>
+    <DiscreteProgressTracker TotalSteps="@TotalSteps" CompletedSteps="@CompletedSteps">
+        <CompletedStepTemplate>
+            <div style="width: 10px; height: 20px; background-color: red; border: 1px solid white; float: left"></div>
+        </CompletedStepTemplate>
+        <IncompleteStepTemplate>
+            <div style="width: 10px; height: 20px; background-color: blue; border: 1px solid white; float: left"></div>
+        </IncompleteStepTemplate>
+        <CurrentStepTemlpate>
+            <div style="width: 10px; height: 20px; background-color: yellow; border: 1px solid white; float: left"></div>
+        </CurrentStepTemlpate>
+    </DiscreteProgressTracker>
+</div>
+<br />
 
+<div>
+    <DiscreteProgressTracker TotalSteps="@TotalSteps" CompletedSteps="@CompletedSteps">
+        <IncompleteStepTemplate>
+            <div style="width: 30px; height: 30px; background-color: blue; border: 1px solid white; float: left"></div>
+        </IncompleteStepTemplate>
+        <CurrentStepTemlpate>
+            <div style="width: 30px; height: 30px; background-color: yellow; border: 1px solid white; float: left"></div>
+        </CurrentStepTemlpate>
+        <CompletedStepTemplate>
+            <div style="width: 30px; height: 30px; background-color: lightgreen; border: 1px solid white; float: left"></div>
+        </CompletedStepTemplate>
+        <LastIncompleteStepTemplate>
+            <div style="width: 30px; height: 30px; background-color: green; border: 1px solid white; float: left">Final Step</div>
+        </LastIncompleteStepTemplate>
+    </DiscreteProgressTracker>
+</div>
 <button @onclick="CompleteStep">Complete Step</button>
 <button @onclick="Reset">Reset</button>
 

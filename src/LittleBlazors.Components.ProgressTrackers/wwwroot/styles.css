@@ -3,9 +3,11 @@
     used from a library project/package.
 */
 
-.my-component {
+.discrete-progress-tracker-container {
     border: 2px dashed red;
-    padding: 1em;
-    margin: 1em 0;
-    background-image: url('background.png');
+    display: block;
+}
+
+.reset-float {
+    float: none;
 }

@@ -1,4 +1,4 @@
-﻿<div class="my-component">
+﻿<div class="discrete-progress-tracker-container">
     @for (var i = 0; i < this.CompletedSteps; i++)
     {
         @CompletedStepTemplate
@@ -7,27 +7,54 @@
     @if (this.CompletedSteps < this.TotalSteps)
     {
         @CurrentStepTemlpate
-    }
 
-    @for (var i = 0; i < this.TotalSteps - this.CompletedSteps - 1; i++)
-    {
-        @IncompleteStepTemplate
+        @for (var i = this.CompletedSteps + 1; i < this.TotalSteps; i++)
+        {
+            if (i < this.TotalSteps - 1)
+            {
+                @IncompleteStepTemplate
+            }
+            else
+            {
+                @LastIncompleteStepTemplate
+            }
+        }
     }
 </div>
 
 @code
 {
     private RenderFragment incompleteStepTemplate;
+    private RenderFragment lastStepTemplate;
 
+    /// <summary>
+    /// Specifies the total number of steps to track
+    /// </summary>
     [Parameter]
     public int TotalSteps { get; set; }
 
+    /// <summary>
+    /// Specifies the number of completed steps - progress
+    /// </summary>
     [Parameter]
     public int CompletedSteps { get; set; }
 
+    /// <summary>
+    /// Specifies the template for a completed step
+    /// </summary>
     [Parameter]
     public RenderFragment CompletedStepTemplate { get; set; }
 
+    /// <summary>
+    /// Specifies the template for the current step/
+    /// </summary>
+    /// <remarks>This template is optional</remarks>
+    [Parameter]
+    public RenderFragment CurrentStepTemlpate { get; set; }
+
+    /// <summary>
+    /// Specifies the template for an incomplete step
+    /// </summary>
     [Parameter]
     public RenderFragment IncompleteStepTemplate
     {
@@ -37,11 +64,18 @@
             this.incompleteStepTemplate = value;
             if (this.CurrentStepTemlpate == null)
                 this.CurrentStepTemlpate = value;
+
+            if (this.LastIncompleteStepTemplate == null)
+                this.LastIncompleteStepTemplate = value;
         }
     }
 
+    /// <summary>
+    /// Specifies the template for the last step, when it's not yet current or complete.
+    /// </summary>
+    /// <remarks>This template is optional</remarks>
     [Parameter]
-    public RenderFragment CurrentStepTemlpate { get; set; }
+    public RenderFragment LastIncompleteStepTemplate { get; set; }
 
     protected override void OnInitialized()
     {
