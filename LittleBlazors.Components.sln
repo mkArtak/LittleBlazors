@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Core", "src\LittleBlazors.Components.Core\LittleBlazors.Components.Core.csproj", "{5DF87E9D-AD53-4EF0-A7F0-F95AFF931922}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE42ADC1-BCF5-408F-88A7-32704877C814}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{31F52547-96F6-4CFE-944C-3C8E56E5CD69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.ProgressTrackers", "src\LittleBlazors.Components.ProgressTrackers\LittleBlazors.Components.ProgressTrackers.csproj", "{5403C44E-37A0-489D-AE5E-E24839BBE926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +39,20 @@ Global
 		{5DF87E9D-AD53-4EF0-A7F0-F95AFF931922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DF87E9D-AD53-4EF0-A7F0-F95AFF931922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DF87E9D-AD53-4EF0-A7F0-F95AFF931922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5403C44E-37A0-489D-AE5E-E24839BBE926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5403C44E-37A0-489D-AE5E-E24839BBE926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5403C44E-37A0-489D-AE5E-E24839BBE926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5403C44E-37A0-489D-AE5E-E24839BBE926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01C3BD08-1575-4CCC-82B9-B23DCC7C7AC2} = {EE42ADC1-BCF5-408F-88A7-32704877C814}
+		{484A6C99-6F70-406A-B253-22E388D44509} = {31F52547-96F6-4CFE-944C-3C8E56E5CD69}
+		{304C5B45-EBE4-4358-B4A7-0602DA0AE8D1} = {EE42ADC1-BCF5-408F-88A7-32704877C814}
+		{5DF87E9D-AD53-4EF0-A7F0-F95AFF931922} = {EE42ADC1-BCF5-408F-88A7-32704877C814}
+		{5403C44E-37A0-489D-AE5E-E24839BBE926} = {EE42ADC1-BCF5-408F-88A7-32704877C814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0A84BF2-CC41-4370-BC91-D5C49DF45618}

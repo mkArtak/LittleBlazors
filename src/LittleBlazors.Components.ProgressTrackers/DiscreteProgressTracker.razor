@@ -1,47 +1,47 @@
 ﻿<div class="my-component">
-    @for (var i = 0; i < this.CompletedStates; i++)
+    @for (var i = 0; i < this.CompletedSteps; i++)
     {
-        @CompletedStateTemplate
+        @CompletedStepTemplate
     }
 
-    @if (this.CompletedStates < this.TotalStates)
+    @if (this.CompletedSteps < this.TotalSteps)
     {
-        @CurrentStateTemlpate
+        @CurrentStepTemlpate
     }
 
-    @for (var i = 0; i < this.TotalStates - this.CompletedStates - 1; i++)
+    @for (var i = 0; i < this.TotalSteps - this.CompletedSteps - 1; i++)
     {
-        @IncompleteStateTemplate
+        @IncompleteStepTemplate
     }
 </div>
 
 @code
 {
-    private RenderFragment incompleteStateTemplate;
+    private RenderFragment incompleteStepTemplate;
 
     [Parameter]
-    public int TotalStates { get; set; }
+    public int TotalSteps { get; set; }
 
     [Parameter]
-    public int CompletedStates { get; set; }
+    public int CompletedSteps { get; set; }
 
     [Parameter]
-    public RenderFragment CompletedStateTemplate { get; set; }
+    public RenderFragment CompletedStepTemplate { get; set; }
 
     [Parameter]
-    public RenderFragment IncompleteStateTemplate
+    public RenderFragment IncompleteStepTemplate
     {
-        get => this.incompleteStateTemplate;
+        get => this.incompleteStepTemplate;
         set
         {
-            this.incompleteStateTemplate = value;
-            if (this.CurrentStateTemlpate == null)
-                this.CurrentStateTemlpate = value;
+            this.incompleteStepTemplate = value;
+            if (this.CurrentStepTemlpate == null)
+                this.CurrentStepTemlpate = value;
         }
     }
 
     [Parameter]
-    public RenderFragment CurrentStateTemlpate { get; set; }
+    public RenderFragment CurrentStepTemlpate { get; set; }
 
     protected override void OnInitialized()
     {
