@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29111.66
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33209.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.TestHost", "LittleBlazors.TestHost\LittleBlazors.TestHost.csproj", "{221ED9D4-FB2E-4B66-A9CB-BA1C686B084A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Charts", "..\src\LittleBlazors.Components.Charts\LittleBlazors.Components.Charts.csproj", "{2E8FAC65-715E-4161-86D8-9A284710FEC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Wizards", "..\src\LittleBlazors.Components.Wizard\LittleBlazors.Components.Wizards.csproj", "{090AE051-A054-4747-863C-0F1EED1A2129}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.Core", "..\src\LittleBlazors.Components.Core\LittleBlazors.Components.Core.csproj", "{B0DA2D3A-ACFA-42FE-BCF3-46557BF84E69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleBlazors.Components.ProgressTrackers", "..\src\LittleBlazors.Components.ProgressTrackers\LittleBlazors.Components.ProgressTrackers.csproj", "{28A16F0D-B81F-4092-8FF9-2E1E57C28A9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E8FAC65-715E-4161-86D8-9A284710FEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090AE051-A054-4747-863C-0F1EED1A2129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090AE051-A054-4747-863C-0F1EED1A2129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090AE051-A054-4747-863C-0F1EED1A2129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090AE051-A054-4747-863C-0F1EED1A2129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DA2D3A-ACFA-42FE-BCF3-46557BF84E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DA2D3A-ACFA-42FE-BCF3-46557BF84E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DA2D3A-ACFA-42FE-BCF3-46557BF84E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DA2D3A-ACFA-42FE-BCF3-46557BF84E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A16F0D-B81F-4092-8FF9-2E1E57C28A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A16F0D-B81F-4092-8FF9-2E1E57C28A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A16F0D-B81F-4092-8FF9-2E1E57C28A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A16F0D-B81F-4092-8FF9-2E1E57C28A9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
