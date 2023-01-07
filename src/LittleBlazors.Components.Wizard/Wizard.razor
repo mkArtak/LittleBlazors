@@ -153,6 +153,7 @@
     private async Task CompleteWizard()
     {
         this.CurrentPage.StoreState();
+        await this.CurrentPage.OnNavigatingAway(true);
         await this.OnComplete.InvokeAsync(this.StateManager);
         this.StateHasChanged();
     }
