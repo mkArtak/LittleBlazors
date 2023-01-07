@@ -10,21 +10,13 @@
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
     <PackageTags>Blazor wizard component</PackageTags>
     <Authors>mkArtak</Authors>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
