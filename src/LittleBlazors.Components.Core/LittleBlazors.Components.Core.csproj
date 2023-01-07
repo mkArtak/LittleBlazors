@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1.1-alpha</Version>
+    <Version>0.0.2.0-alpha</Version>
     <Description>Core types used by the LittleBlazors.Components library</Description>
     <PackageProjectUrl>https://github.com/mkArtak/LittleBlazors</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mkArtak/LittleBlazors</RepositoryUrl>
