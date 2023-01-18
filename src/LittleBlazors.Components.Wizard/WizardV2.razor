@@ -1,0 +1,28 @@
+﻿<div class="left">
+    <button @onclick="@(()=>Navigate(false))">Previous</button>
+    <div class="right">
+        <div class="content">
+            <DynamicComponent Type="currentPageType" />
+        </div>
+        <button @onclick="@(()=>Navigate(true))">Next</button>
+    </div>
+</div>
+
+@code {
+    private int currentPageIndex = 0;
+
+    private Type currentPageType => Pages[currentPageIndex];
+
+    [Parameter]
+    public Type[] Pages { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private void Navigate(bool forward)
+    {
+        currentPageIndex += forward ? 1 : -1;
+    }
+}
