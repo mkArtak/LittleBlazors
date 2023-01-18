@@ -66,14 +66,12 @@
     /// </summary>
     protected bool IsPageActive => this.Wizard.CurrentPage == this;
 
-    private void ForEachStateProperty(Action<PropertyInfo, StateAttribute>
-    handler, bool includeReadOnly)
+    private void ForEachStateProperty(Action<PropertyInfo, StateAttribute> handler, bool includeReadOnly)
     {
         var stateProps = this.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
         foreach (var prop in stateProps)
         {
-            var stateAttribute = prop.GetCustomAttributes<StateAttribute>
-                ().SingleOrDefault();
+            var stateAttribute = prop.GetCustomAttributes<StateAttribute>().SingleOrDefault();
             if (stateAttribute == null)
                 continue;
 
@@ -120,4 +118,10 @@
     {
         return Task.FromResult(true);
     }
+
+    /// <summary>
+    /// Returns a boolean indicating whether navigating to current page is possible or not.
+    /// If not, the navigation will skip over this page.
+    /// </summary>
+    protected internal virtual bool CanNavigateTo() => true;
 }
