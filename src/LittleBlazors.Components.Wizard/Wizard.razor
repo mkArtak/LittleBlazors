@@ -30,7 +30,7 @@
     }
 </div>
 
-@code{
+@code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
@@ -90,15 +90,15 @@
     [Parameter]
     public string WizardPageContainerClassName { get; set; }
 
-    private int currentPage = 0;
+    private int currentPageIndex = 0;
 
-    internal WizardPage CurrentPage => this.Pages[currentPage];
+    internal WizardPage CurrentPage => GetPage(currentPageIndex);
 
     internal IWizardStateManager StateManager { get; } = new WizardStateManager();
 
-    private bool CanGoNext => this.currentPage < this.Pages.Count - 1;
+    private bool CanGoNext => this.currentPageIndex < this.Pages.Count - 1;
 
-    private bool CanGoBack => this.currentPage > 0;
+    private bool CanGoBack => this.currentPageIndex > 0;
 
     private List<WizardPage> Pages { get; } = new List<WizardPage>();
 
@@ -124,7 +124,9 @@
         if (!this.CanGoNext)
             return false;
 
-        await this.TurnToPage(this.currentPage + 1);
+        if (!await this.TurnToPage(true))
+            return false;
+
         this.StateHasChanged();
 
         return true;
@@ -138,7 +140,9 @@
         if (!this.CanGoBack)
             return false;
 
-        await this.TurnToPage(this.currentPage - 1);
+        if (!await this.TurnToPage(false))
+            return false;
+
         this.StateHasChanged();
 
         return true;
@@ -158,16 +162,31 @@
         this.StateHasChanged();
     }
 
-    private async Task TurnToPage(int page)
+    private async Task<bool> TurnToPage(bool navigatingForward)
     {
         this.CurrentPage.StoreState();
-        if (await this.CurrentPage.OnNavigatingAway(page > this.currentPage))
+        int page = this.currentPageIndex + (navigatingForward ? 1 : -1);
+        while (!this.GetPage(page).CanNavigateTo())
+            page += navigatingForward ? 1 : -1;
+
+        if (page < 0 || page >= this.Pages.Count)
         {
-            await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
-            this.currentPage = page;
-            this.CurrentPage.RestoreState();
-            await this.CurrentPage.OnNavigatedTo();
-            await this.OnPageLoading.InvokeAsync(this.CurrentPage);
+            logger.LogWarning("No pages available to navigate to.");
+            return false;    
         }
+
+        if (!await this.CurrentPage.OnNavigatingAway(navigatingForward))
+            return false;
+
+        await this.OnPageUnloading.InvokeAsync(this.CurrentPage);
+
+        this.currentPageIndex = page;
+        this.CurrentPage.RestoreState();
+        await this.CurrentPage.OnNavigatedTo();
+        await this.OnPageLoading.InvokeAsync(this.CurrentPage);
+
+        return true;
     }
+
+    private WizardPage GetPage(int index) => Pages[index];
 }
