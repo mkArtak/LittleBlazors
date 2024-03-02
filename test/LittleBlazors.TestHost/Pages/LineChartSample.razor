@@ -5,10 +5,16 @@
 
 <h1>LineChart sample</h1>
 
-<LittleBlazors.Components.Charts.LineChart Data="@data" />
+<LittleBlazors.Components.Charts.LineChart Data="@data" ContainerClass="customHeight" />
 
 <button @onclick="AddRandomLine">Add line</button>
 <button @onclick="Reset">Reset</button>
+
+<style type="text/css">
+.customHeight {
+    height: 800px;
+}    
+</style>
 
 @code{
     ChartData data = new ChartData() { Title = "Sample chart" }
@@ -43,6 +49,6 @@
             this.data.Lines.Remove(this.data.Lines.Last().Key);
         }
 
-        AddRandomLine();
+        //AddRandomLine();
     }
 } 
