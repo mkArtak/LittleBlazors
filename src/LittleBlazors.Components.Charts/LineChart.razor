@@ -3,9 +3,9 @@
 
 @inject GoogleChartsInterop interop;
 
-<div @ref="chartContainer" />
+<div @ref="chartContainer" class="@ContainerClass" />
 
-@code{
+@code {
     [Parameter]
     public ChartData Data { get; set; }
 
